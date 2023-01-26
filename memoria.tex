@@ -222,7 +222,7 @@ Ahora bien, en Github se comparten infinidad de proyectos de software libre y no
 Para resolver estas y más preguntas es que, gracias al paquete PyGithub\footnote{\url{https://github.com/pygithub/pygithub}}, he desarrollado esta aplicación web que permite al usuario introducir el nombre de un repositorio y analizarlo según los parámetros que más
 le convengan.
 
-El proyecto nace como una extensión de OpenBRR\footnote{\url{https://link.springer.com/chapter/10.1007/978-3-642-13244-5_18}} que es una forma de analizar proyectos en función a los siguientes 6 parámetros: funcionalidad, calidad, soporte, comunidad, adopción y usabilidad.
+El proyecto\cite{website:RepositorioTFG}  nace como una extensión de OpenBRR\footnote{\url{https://link.springer.com/chapter/10.1007/978-3-642-13244-5_18}} que es una forma de analizar proyectos en función a los siguientes 6 parámetros: funcionalidad, calidad, soporte, comunidad, adopción y usabilidad.
 A estos parámetros se les asigna un peso y a partir de ahí, da una calificación final sobre 5 del proyecto. A parte de OpenBRR existen otras formas de analizar proyectos como OSMM, OpenBQR o MOSST entre muchos otros pero me decanté por esta opción al ser la que más se 
 centraba en analizar los proyectos de software libre.
 
@@ -290,10 +290,16 @@ A la hora de realizar este proyecto, he abordado los siguientes objetivos espec�
 \section{Planificación temporal}
 \label{sec:planificacion-temporal}
 
-A mí me gusta que aquí pongáis una descripción de lo que os ha llevado realizar el trabajo.
-Hay gente que añade un diagrama de GANTT.
-Lo importante es que quede claro cuánto tiempo llevas (tiempo natural, p.ej., 6 meses) y a qué nivel de esfuerzo (p.ej., principalmente los fines de semana).
+El proyecto se empezó a pensar a finales de Febrero de 2022 pero no fue hasta el verano de ese año que se empezó a trabajar en serio en él ya que anteriormente tenía que compaginarlo con las prácticas externas y no disponía del tiempo necesario. 
+De Marzo a Junio de 2022 dedicaba las mañanas de los sábados y domingos a investigar qué era OpenBRR, en qué consistía y cómo podía usarlo para este proyecto. Asimismo mi tutor me recomendó usar el paquete Perceval\footnote{\url{https://perceval.readthedocs.io/en/latest/perceval/git.html}} de Python para analizar los repositorios de GitHub pero tras investigar por mi cuenta di con el paquete PyGithub el cual analizaba los repositorios de una forma más rápida y cómoda para el desarrollador ya que únicamente con introducir el nombre del repositorio es capaz de sacar todos los datos necesarios.
 
+Durante el verano, pasaba las mañanas de lunes a viernes trabajando en el TFG y conseguí entender el funcionamiento completo de PyGithub así como analizar todos los datos que me devolvía y relacionarlos con los 6 parámetros de OpenBRR intentando que cada dato perteneciera al parámetro que más le correspondiera.
+
+En el mes de Septiembre decidí implementar Django en la aplicación para ser capaz de leer, manipular y crear páginas web a través de las peticiones del usuario. No tenía conocimientos sobre esta tecnología así que usé los tutoriales de DjangoGirls\footnote{\url{https://djangogirls.org/es/}}\cite{website:DjangoGirls} para aprender a utilizarla dedicando 3 tardes de lunes a viernes y las mañanas de los sábados y domingos.
+
+Finalmente, de Octubre de 2022 a Enero de 2023, empecé con el desarrollo de la aplicación web dedicando el mismo reparto de tiempo que para aprender Django ya que tenía clases de la universidad por las mañanas salvo en las vacaciones de Navidad que le dediqué todas las mañanas sin excepción. Durante el desarrollo surgieron varias dudas como qué datos asignar a qué parámetros y, sobretodo, qué peso asignarle a cada dato pero tras varias reuniones con mi tutor decidimos que el usuario pudiera manejar los pesos a su antojo para así poder centrarse en analizar los repositorios de la forma que más le convenga.
+A finales de Diciembre comencé a hacer pruebas con repositorios profesionales como el propio de PyGithub o los de myTeachingURJC\footnote{\url{https://github.com/myTeachingURJC}} (los cuales son utilizados por los profesores de la universidad para compartir contenido de sus asignaturas) y con repositorios de peor calidad como mis primeros repositorios en busca de evaluaciones coherentes y algún error. Para principios de Enero la aplicación ya era funcional pero no tenía ningún tipo de estilo así que dediqué el resto del tiempo a personalizar su aspecto, así como a corregir y controlar errores que surgían durante las diferentes pruebas que realizaba.
+Por tanto, dediqué las mañanas de finales de Enero y todo Febrero para la realización de la memoria con el objetivo de poder presentar el proyecto en Marzo.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -304,72 +310,84 @@ Lo importante es que quede claro cuánto tiempo llevas (tiempo natural, p.ej., 6
 \chapter{Estado del arte}
 \label{chap:estado}
 
-Descripción de las tecnologías que utilizas en tu trabajo. 
-Con dos o tres párrafos por cada tecnología, vale. 
-Se supone que aquí viene todo lo que no has hecho tú.
+Para la realización de este proyecto se ha utilizado Python, PyGithub, Github, Django, HTML, CSS, Javascript y OpenBRR.
 
-Puedes citar libros, como el de Bonabeau et al., sobre procesos estigmérgicos~\cite{bonabeau:_swarm}. 
-Me encantan los procesos estigmérgicos.
-Deberías leer más sobre ellos.
-Pero quizás no ahora, que tenemos que terminar la memoria para sacarnos por fin el título.
-Nota que el \~ \ añade un espacio en blanco, pero no deja que exista un salto de línea. 
-Imprescindible ponerlo para las citas.
+\section{Python}
+\label{sec:python}
 
-Citar es importantísimo en textos científico-técnicos. 
-Porque no partimos de cero.
-Es más, partir de cero es de tontos; lo suyo es aprovecharse de lo ya existente para construir encima y hacer cosas más sofisticadas.
-¿Dónde puedo encontrar textos científicos que referenciar?
-Un buen sitio es Google Scholar\footnote{\url{http://scholar.google.com}}.
-Por ejemplo, si buscas por ``stigmergy libre software'' para encontrar trabajo sobre software libre y el concepto de \emph{estigmergia} (¿te he comentado que me gusta el concepto de estigmergia ya?), encontrarás un artículo que escribí hace tiempo cuyo título es ``Self-organized development in libre software: a model based on the stigmergy concept''.
-Si pulsas sobre las comillas dobles (entre la estrella y el ``citado por ...'', justo debajo del extracto del resumen del artículo, te saldrá una ventana emergente con cómo citar.
-Abajo a la derecha, aparece un enlace BibTeX.
-Púlsalo y encontrarás la referencia en formato BibTeX, tal que así:
+Python\cite{website:Python} es un lenguaje de programación interpretado que le da importancia a la legibilidad del código teniendo una sintaxis muy limpia. Está orientado a objetos y permite ser un buen lenguaje para aprender a programar ya que tiene una curva de aprendizaje muy suave qracias a su sintaxis muy cercana al lenguaje humano. En un lenguaje de código abierto, lo que le permite estar en constante mejora por parte de los usuarios y ser adaptado para diferentes usos como el Machine Learning.
 
-{\footnotesize
+Python fue creado por Guido van Rossum en 1991 mientras trabajaba en el sistema operativo Amoeba\footnote{\url{https://www.cs.vu.nl/pub/amoeba/}} teniendo como objetivo controlar excepciones y manejar interfaces de dicho sistema operativo. A finales del año 2000 nació Python 2.0 el cual soportaba Unicode por primera vez y empezó a ser desarrollado por la comunidad bajo la mirada de Guido. Finalmente, en 2008 se lanzó Python 3.0 siendo la versión más completa de Python pero incompatible con las anteriores por lo que muchas características se implementaron también en Python 2.6.
+
+La filosofía de Python se basa en los siguientes puntos para hacer la vida más fácil al desarrollador:
+
+ \begin{itemize}
+ 	\item Hermoso es mejor que feo.
+	\item Explícito es mejor que implícito.
+ 	\item Simple es mejor que complejo.
+ 	\item Plano es mejor que anidado.
+ 	\item Disperso es mejor que denso.
+ 	\item El código legible cuenta.
+	\item Casos especiales no son lo suficientemente 	especiales para romper las reglas.
+	\item Casi siempre lo práctico vence a lo formal
+	\item Los errores no deben pasar nunca desapercibidos, a menos que se
+especifique este comportamiento.
+	\item Ante una ambigüedad, descarte la tentación a adivinar.
+	\item Debe haber una, y preferentemente una sola, manera obvia de lograr.
+algo, aunque esta generalmente no está clara a primera vista a menos
+que seas un genio.
+	\item Ahora es mejor que nunca, aunque en muchas ocasiones nunca es
+mejor que ahora mismo.
+	\item Si la implementación es difícil de explicar, entonces es una mala idea.
+	\item Si la implementación es fácil de explicar, entonces pudiera ser una
+buena idea.
+	\item Los espacios de nombre son una buena idea, hagamos más de eso.
+ \end{itemize}
+ 
+ Para finalizar, aquí podemos ver un ejemplo de un fragmento de código en Python correspondiente a un desarrollo que hice por mi cuenta\footnote{\url{https://github.com/ivanmiguelmolinero/Python2D}} : 
+ 
+ {\footnotesize
 \begin{verbatim}
-@inproceedings{robles2005self,
-  title={Self-organized development in libre software:
-         a model based on the stigmergy concept},
-  author={Robles, Gregorio and Merelo, Juan Juli\'an 
-          and Gonz\'alez-Barahona, Jes\'us M.},
-  booktitle={ProSim'05},
-  year={2005}
-}
+  class MiCuchillo(Sprite):
+    def __init__(self, image, dir, x, y):
+        super().__init__(image)
+        self.position = (x, y)
+        self.direccion = dir
+        self.cshape = AARectShape(self.position, self.width/5, self.height/5)
+
+    def update(self, dt):
+        coor_cuchillo = manejador_scroll.world_to_screen(self.x, self.y)[0]
+        if coor_cuchillo > 1280 or coor_cuchillo < 0:
+            self.kill()
+        if self.direccion == 'd':
+            self.position += Vector2(20, 0)
+        if self.direccion == 'i':
+            self.position -= Vector2(20, 0)
+        self.cshape.center = Vector2(self.position[0], self.position[1])
 \end{verbatim}
 }
 
-Copia el texto en BibTeX y pégalo en el fichero \texttt{memoria.bib}, que es donde están las referencias bibliográficas.
-Para incluir la referencia en el texto de la memoria, deberás citarlo, como hemos hecho antes con, lo que pasa es que en vez de el identificador de la cita anterior (bonabeau:\_swarm), tendrás que poner el nuevo (robles2005self).
-Compila el fichero \texttt{memoria.tex} (\texttt{pdflatex memoria.tex}), añade la bibliografía (\texttt{bibtex memoria.aux}) y vuelve a compilar \texttt{memoria.tex} (\texttt{pdflatex memoria.tex})\ldots y \emph{voilà} ¡tenemos una nueva cita
+\section{PyGithub}
+\label{sec:pygithub}
 
-También existe la posibilidad de poner notas al pie de página, por ejemplo, una para indicarte que visite la página del GSyC\footnote{\url{http://gsyc.es}}.
+PyGithub\cite{website:Pygithub} se trata de la librería utilizada en la aplicación para analizar los datos del repositorio. Adicionalmente, también permite administrar recursos de Github como repositorios, perfiles de usuario y organizaciones. Es una librería de código abierto lo que permite que esté en constante mejora y desarrollo por parte de la comunidad. 
 
+Algunas funciones de interés son:
 
+\subsection{getrepository()}
 
-\section{Sección 1} 
-\label{sec:seccion1}
+Esta función permite obtener todos los datos del repositorio únicamente pasándole el nombre del repositorio. Ejemplo de uso sacado directamente de este proyecto:
 
-Hemos hablado de cómo incluir figuras.
-Pero no hemos dicho nada de tablas.
-A mí me gustan las tablas.
-Mucho.
-Aquí un ejemplo de tabla, la Tabla~\ref{tabla:ejemplo} (siento ser pesado, pero nota cómo he puesto la referencia).
+ {\footnotesize
+\begin{verbatim}
+  # Obtenemos el repositorio introducido por el usuario
+    repo = get_repository(request.GET['text'])
+\end{verbatim}
+}
 
-\begin{table}
- \begin{center}
-  \begin{tabular}{ | l | c | r |} % tenemos tres colummnas, la primera alineada a la izquierda (l), la segunda al centro (c) y la tercera a la derecha (r). El | indica que entre las columnas habrá una línea separadora.
-    \hline
-    Uno & 2 & 3 \\ \hline % el hline nos da una línea vertical
-    Cuatro & 5 & 6 \\ \hline
-    Siete & 8 & 9 \\
-    \hline
-  \end{tabular}
-  \label{tabla:ejemplo}
-  \caption{Ejemplo de tabla. Aquí viene una pequeña descripción (el \emph{caption}) del contenido de la tabla. Si la tabla no es autoexplicativa, siempre viene bien aclararla aquí.}
- \end{center}
-\end{table}
+\subsection{getwiki()}
 
-
+Esta función es un ejemplo de los datos que nos permite analizar PyGithub. En concreto, ``getwiki()´´ nos devuelve si el repositorio en cuestión tiene wiki o no. Otros ejemplos de funciones de este tipo son ``repo.homepage´´, ``repo.subscriberscount´´, ``repo.getcommits().totalCount´´...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
