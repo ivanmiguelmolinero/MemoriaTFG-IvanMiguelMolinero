@@ -135,8 +135,9 @@ Fuenlabrada, a \qquad$\;\,$ de \qquad\qquad\qquad\qquad de 202X
 \chapter*{}
 \pagenumbering{Roman} % para comenzar la numeracion de paginas en numeros romanos
 \begin{flushright}
-\textit{Dedicado a \\
-mi familia / mi abuelo / mi abuela}
+\textit{Hazlo o no lo hagas, \\
+pero no lo intentes. \\
+Maestro Yoda}
 \end{flushright}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -374,7 +375,7 @@ PyGithub\cite{website:Pygithub} se trata de la librería utilizada en la aplicac
 
 Algunas funciones de interés son:
 
-\subsection{getrepository()}
+\subsection{get\textunderscore repository()}
 
 Esta función permite obtener todos los datos del repositorio únicamente pasándole el nombre del repositorio. Ejemplo de uso sacado directamente de este proyecto:
 
@@ -385,9 +386,117 @@ Esta función permite obtener todos los datos del repositorio únicamente pasán
 \end{verbatim}
 }
 
-\subsection{getwiki()}
+\subsection{get\textunderscore wiki()}
 
 Esta función es un ejemplo de los datos que nos permite analizar PyGithub. En concreto, ``getwiki()´´ nos devuelve si el repositorio en cuestión tiene wiki o no. Otros ejemplos de funciones de este tipo son ``repo.homepage´´, ``repo.subscriberscount´´, ``repo.getcommits().totalCount´´...
+
+\section{Github}
+\label{sec:github}
+
+Github es una herramienta esencial para ingenieros de software que consiste en un servicio basado en la nube donde los desarrolladores suben sus proyectos de código abierto a unos repositorios para compartirlos con la comunidad, permitiendo así realizar cambios y mejoras en el proyecto. Se ha convertido en una herramienta muy popular llegando a alojar más de 100 millones de repositorios.
+
+Github fue desarrollado por Chris Wanstrath, P. J. Hyett, Tom Preston-Werner y Scott Chacon usando Ruby on Rails, y comenzó a funcionar en 2008. Desde 2018 pertenece a Microsoft.
+
+A continuación se explican los diferentes mecanismos que permiten que funcione Github.
+
+\subsection{Repositorios}
+
+Lugar donde los desarrolladores suben sus proyectos. Por ejemplo, este proyecto está subido en el repositorio ``ivanmiguelmolinero/TFG´´.
+
+\subsection{Pull request}
+
+Es la funcionalidad que permite a los desarrolladores colaborar entre ellos sugiriendo cambios del programa en cuestión.
+
+\subsection{Commits}
+
+Funcionalidad que permite realizar y subir al repositorio cambios en el proyecto junto con un breve mensaje descriptivo. Se puede ejecutar mediante la interfaz de un editor de código con VSCode\footnote{\url{https://code.visualstudio.com/}} o bien ejecutando ``git commit -m [mensaje descriptivo entre comillas]´´ en una ventana de comandos.
+
+\subsection{Wiki}
+
+Sección del repositorio donde se explica la funcionalidad del proyecto, el manual de usuario y los diferentes cambios que se van implementando. Muchos proyectos también usan el README del repositorio para estas funcionalidades.
+
+\section{Django}
+\label{sec:django}
+
+Django es un framework de Python de alto nivel que fue creado para gestionar páginas web facilitando la creación de sitios web complejos. Fue lanzado inicialmente en Julio de 2005. 
+
+La distribución principal de Django permite aplicaciones con un sistema de comentarios, herramientas para juntar contenido vía RSS\footnote{\url{https://www.rssboard.org/rss-specification}} o Atom\footnote{\url{https://www.ietf.org/rfc/rfc4287}} , plantillas que permiten gestionar páginas de contenido sin necesidad de escribir controladores o vistas de esas páginas  y un sistema de redirección de URLs.
+
+Las características principales de Django son:
+
+\begin{itemize}
+	\item Framework muy rápido, es decir, permite a los desarrolladores terminar sus proyectos lo más rápido posible.
+	\item Es muy seguro: ayuda a evitar los errores de seguridad más comunes.
+	\item Es muy escalable: a medida que crece la aplicación da facilidades para añadirle las nuevas funcionalidades.
+\end{itemize} 
+
+\section{HTML}
+\label{sec:html}
+
+HTML\cite{website:HTML}  (lenguaje de marcas de hipertexto) es el componente más básico de una página web. Es usado para estructurar el contenido de la misma. Normalmente se utiliza junto con CSS y Javascript que se explicarán en los siguientes apartados.
+Hipertexto se refiere a los enlaces que conectan las páginas web entre sí.
+
+Un elemento HTML se distingue de otro mediante etiquetas que se definen entre los símbolos $"<"$ y $">"$. 
+
+En la siguiente figura se puede ver un ejemplo de HTML
+\begin{figure}
+  \centering
+  \includegraphics[width=10cm, keepaspectratio]{img/html.png}
+  \caption{Fragmento HTML}\label{fig:html}
+\end{figure}
+\\
+
+\section{CSS}
+\label{sec:CSS}
+
+CSS\cite{website:CSS} (del inglés Cascading Style Sheets) es utilizado para dar estilo a las páginas web creadas con HTML o XML. Ha tenido varias versiones pero es desde CSS3 que su alcance es tal que cada módulo empezó a mostrar varias diferencias por lo que el W3C\footnote{\url{https://www.w3.org/}}  decidió empezar a realizar capturas de las últimas especificaciones estables.
+
+Su sintaxis más básica consiste en hacer referencia a las diferentes etiquetas de HTML y definir su estilo entre corchetes. Por ejemplo:
+
+\begin{verbatim}
+div {
+    text-align: center;
+}
+
+img {
+  height: 20px;
+  margin-left: 0px;
+}
+\end{verbatim}
+
+\section{Javascript}
+\label{sec:Javascript}
+
+Javascript\cite{website:Javascript} (abreviado JS) es un lenguaje de programación ligero, interpretado y compilado ``just-in-time´´. Se usa para secuencias de comandos en páginas web aunque también se utiliza en otros entornos como Node.js\footnote{\url{https://developer.mozilla.org/es/docs/Glossary/Node.js}}.
+
+Se originó en el año 1995 para el navegador Netscape como una forma de agregar programas a páginas web. Desde entonces, el lenguaje ha sido adoptado por todos los demás navegadores gráficos principales. Ha hecho posibles las aplicaciones web modernas, aplicaciones con las que puede interactuar directamente sin hacer una recarga de página para cada acción.
+
+Algunas de las características de Javascript son las siguientes:
+
+\begin{itemize}
+	\item Lenguaje del lado del cliente
+	\item Orientado a objetos
+	\item De tipado débil o no tipado
+	\item De alto nivel
+	\item Lenguaje interpretado
+	\item Muy utilizado por los desarrolladores\\
+\end{itemize}
+
+\section{OpenBRR}
+\label{sec:openbrr}
+
+OpenBRR\cite{website:OpenBRR} (del inglés Business Readiness Rating) es un modelo de evaluación de software libre. Su objetivo es estandarizar una fórmula de evaluación de software. Este método fue patrocinado por el Centro de Investigación de Código abierto e Intel.
+
+Se considera necesario ya que proporciona a las compañías una forma segura, estandarizada y eficaz de evaluar un software antes de adoptarlo. Hasta el momento ha permitido a compañías tanto elegir un software ideal para misiones críticas como descartar otros que a primera vista parecían buenos pero que después de analizarlos dieron con graves problemas de seguridad.
+
+El esquema de análisis se puede ver en la siguiente figura.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=14cm, keepaspectratio]{img/openbrr.png}
+  \caption{Esquema de análisis de OpenBRR}\label{fig:OpenBRR}
+\end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
