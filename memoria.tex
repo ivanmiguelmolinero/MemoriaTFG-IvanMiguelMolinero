@@ -506,32 +506,19 @@ El esquema de análisis se puede ver en la siguiente figura.
 \cleardoublepage
 \chapter{Diseño e implementación}
 
-Aquí viene todo lo que has hecho tú (tecnológicamente). 
-Puedes entrar hasta el detalle. 
-Es la parte más importante de la memoria, porque describe lo que has hecho tú.
-Eso sí, normalmente aconsejo no poner código, sino diagramas.
+En este capítulo se detallará cómo funciona la aplicación desde el código hasta las funciones que debe realizar el usuario.
 
 \section{Arquitectura general} 
 \label{sec:arquitectura}
 
-Si tu proyecto es un software, siempre es bueno poner la arquitectura (que es cómo se estructura tu programa a ``vista de pájaro'').
+Como se puede observar en la figura 4.1 el programa principal depende del usuario, PyGithub y de GitHub. Como se ha explicado anteriormente, el usuario debe introducir la dirección de un repositorio, compuesta por ''usuario\textunderscore de\textunderscore GitHub/nombre\textunderscore del\textunderscore repositorio'' y PyGithub se encarga de pedir los datos a Github y devolvérselos al programa principal. Vamos a ver esta parte con más detalle.
 
-Por ejemplo, puedes verlo en la figura~\ref{fig:arquitectura}.
-\LaTeX \ pone las figuras donde mejor cuadran. 
-Y eso quiere decir que quizás no lo haga donde lo hemos puesto\ldots
-Eso no es malo.
-A veces queda un poco raro, pero es la filosofía de \LaTeX: tú al contenido, que yo me encargo de la maquetación.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/arquitectura.png}
-  \caption{Estructura del parser básico.}\label{fig:arquitectura}
-\end{figure}
+Una vez que el usuario introduce el repositorio, el programa principal, gracias a Django, manda una petición GET a través de la cual se obtiene el repositorio con la función get\textunderscore repository del paquete analize\textunderscore repo.py creado por mí. Este paquete contiene las funciones necesarias para obtener los datos del repositorio. A continuación se crean 6 listas, una por cada parámetro de OpenBRR, en el fichero views.py donde se irán guardando los datos del repositorio.
 
 \begin{figure}
     \centering
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/foro1}
-    \caption{Página con enlaces a hilos}\label{fig:_arquitectura}
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/programaprincipal.jpg}
+    \caption{Arquitectura de la apliación}\label{fig:arquitectura principal}
 \end{figure}
 
  
