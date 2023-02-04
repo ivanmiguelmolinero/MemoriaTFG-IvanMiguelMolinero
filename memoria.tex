@@ -223,13 +223,13 @@ Ahora bien, en Github se comparten infinidad de proyectos de software libre y no
 Para resolver estas y más preguntas es que, gracias al paquete PyGithub\footnote{\url{https://github.com/pygithub/pygithub}}, he desarrollado esta aplicación web que permite al usuario introducir el nombre de un repositorio y analizarlo según los parámetros que más
 le convengan.
 
-El proyecto\cite{website:RepositorioTFG}  nace como una extensión de OpenBRR\footnote{\url{https://link.springer.com/chapter/10.1007/978-3-642-13244-5_18}} que es una forma de analizar proyectos en función a los siguientes 6 parámetros: funcionalidad, calidad, soporte, comunidad, adopción y usabilidad.
+El proyecto\cite{website:RepositorioTFG}  nace como una extensión de OpenBRR\footnote{\url{https://link.springer.com/chapter/10.1007/978-3-642-13244-5_18}} que es una forma de analizar proyectos en función a los siguientes 7 parámetros: funcionalidad, calidad, soporte, comunidad, adopción y usabilidad.
 A estos parámetros se les asigna un peso y a partir de ahí, da una calificación final sobre 5 del proyecto. A parte de OpenBRR existen otras formas de analizar proyectos como OSMM, OpenBQR o MOSST entre muchos otros pero me decanté por esta opción al ser la que más se 
 centraba en analizar los proyectos de software libre.
 
 Esta herramienta ayudará a docentes y desarrolladores a distinguir entre los miles de repositorios de Github cuáles son los que merecen la pena agilizando mucho la búsqueda. Pongamos un ejemplo práctico para que se entienda mejor: un desarrollador busca un paquete
 que realice una función específica para su proyecto pero si tiene que buscar entre las miles de opciones cuál es la mejor, tardaría un tiempo excesivo ya que tendría que analizar cada código por si mismo (con todo lo que ello supone como entenderlo si no está bien comentado),
-buscar vulnerabilidades, descargarlo, probarlo , etc. En cambio, gracias a este proyecto podrá buscar su mejor opción configurando el análisis según le convenga pudiendo poner el foco solo en seguridad, en seguridad y funcionalidad o en los 6 apartados que tiene OpenBRR.
+buscar vulnerabilidades, descargarlo, probarlo , etc. En cambio, gracias a este proyecto podrá buscar su mejor opción configurando el análisis según le convenga pudiendo poner el foco solo en seguridad, en seguridad y funcionalidad o en los 7 apartados que tiene OpenBRR.
 
 
 \section{Estructura de la memoria}
@@ -294,7 +294,7 @@ A la hora de realizar este proyecto, he abordado los siguientes objetivos espec�
 El proyecto se empezó a pensar a finales de Febrero de 2022 pero no fue hasta el verano de ese año que se empezó a trabajar en serio en él ya que anteriormente tenía que compaginarlo con las prácticas externas y no disponía del tiempo necesario. 
 De Marzo a Junio de 2022 dedicaba las mañanas de los sábados y domingos a investigar qué era OpenBRR, en qué consistía y cómo podía usarlo para este proyecto. Asimismo mi tutor me recomendó usar el paquete Perceval\footnote{\url{https://perceval.readthedocs.io/en/latest/perceval/git.html}} de Python para analizar los repositorios de GitHub pero tras investigar por mi cuenta di con el paquete PyGithub el cual analizaba los repositorios de una forma más rápida y cómoda para el desarrollador ya que únicamente con introducir el nombre del repositorio es capaz de sacar todos los datos necesarios.
 
-Durante el verano, pasaba las mañanas de lunes a viernes trabajando en el TFG y conseguí entender el funcionamiento completo de PyGithub así como analizar todos los datos que me devolvía y relacionarlos con los 6 parámetros de OpenBRR intentando que cada dato perteneciera al parámetro que más le correspondiera.
+Durante el verano, pasaba las mañanas de lunes a viernes trabajando en el TFG y conseguí entender el funcionamiento completo de PyGithub así como analizar todos los datos que me devolvía y relacionarlos con los 7 parámetros de OpenBRR intentando que cada dato perteneciera al parámetro que más le correspondiera.
 
 En el mes de Septiembre decidí implementar Django en la aplicación para ser capaz de leer, manipular y crear páginas web a través de las peticiones del usuario. No tenía conocimientos sobre esta tecnología así que usé los tutoriales de DjangoGirls\footnote{\url{https://djangogirls.org/es/}}\cite{website:DjangoGirls} para aprender a utilizarla dedicando 3 tardes de lunes a viernes y las mañanas de los sábados y domingos.
 
@@ -489,7 +489,7 @@ OpenBRR\cite{website:OpenBRR} (del inglés Business Readiness Rating) es un mode
 
 Se considera necesario ya que proporciona a las compañías una forma segura, estandarizada y eficaz de evaluar un software antes de adoptarlo. Hasta el momento ha permitido a compañías tanto elegir un software ideal para misiones críticas como descartar otros que a primera vista parecían buenos pero que después de analizarlos dieron con graves problemas de seguridad.
 
-El esquema de análisis se puede ver en la siguiente figura.
+El esquema de análisis se puede ver en la figura 3.2. Aparte de los parámetros que aparecen en la figura se decidió introducir el parámetro de seguridad al considerarse de importancia también.
 
 \begin{figure}
   \centering
@@ -513,13 +513,38 @@ En este capítulo se detallará cómo funciona la aplicación desde el código h
 
 Como se puede observar en la figura 4.1 el programa principal depende del usuario, PyGithub y de GitHub. Como se ha explicado anteriormente, el usuario debe introducir la dirección de un repositorio, compuesta por ''usuario\textunderscore de\textunderscore GitHub/nombre\textunderscore del\textunderscore repositorio'' y PyGithub se encarga de pedir los datos a Github y devolvérselos al programa principal. Vamos a ver esta parte con más detalle.
 
-Una vez que el usuario introduce el repositorio, el programa principal, gracias a Django, manda una petición GET a través de la cual se obtiene el repositorio con la función get\textunderscore repository del paquete analize\textunderscore repo.py creado por mí. Este paquete contiene las funciones necesarias para obtener los datos del repositorio. A continuación se crean 6 listas, una por cada parámetro de OpenBRR, en el fichero views.py donde se irán guardando los datos del repositorio.
+Una vez que el usuario introduce el repositorio, el programa principal, gracias a Django, manda una petición GET\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Methods/GET}}  a través de la cual se obtiene el repositorio con la función get\textunderscore repository del paquete analize\textunderscore repo.py creado por mí. Este paquete contiene las funciones necesarias para obtener los datos del repositorio. A continuación se crean 7 listas, una por cada parámetro de OpenBRR, en el fichero views.py donde se irán guardando los datos del repositorio.
 
 \begin{figure}
     \centering
     \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/programaprincipal.jpg}
     \caption{Arquitectura de la apliación}\label{fig:arquitectura principal}
 \end{figure}
+
+\subsection{Fichero views.py}
+
+Este fichero forma parte de la estructura de Django y tiene dos funciones principales: recibir las peticiones GET y, en función de dichas peticiones, servir la plantilla HTML correspondiente y organizar los datos extraídos del repositorio a analizar. Funciona de la siguiente manera:
+
+\begin{enumerate}
+	\item El usuario manda mediante una petición GET el nombre del repositorio, el fichero views.py lo recibe y le pide a PyGithub los datos del repositorio para mostrar al usuario la plantilla ''repo\textunderscore data.html'' donde podrá leer los datos y manipularlos para su posterior calificación. En caso de que no exista el repositorio escrito por el usuario se devolverá la plantilla ''error.html'' donde se le da la posibilidad de volver a la página principal para volver a escribir el nombre correctamente.
+	\item Una vez extraídos los datos del repositorio, views.py los organiza y guarda en 7 listas correspondientes a los parámetros de OpenBRR(posts, post\textunderscore sec, post\textunderscore func, post\textunderscore supp, post\textunderscore qual, post\textunderscore usab y post\textunderscore adop correspondientes a los parámetros de comunidad, seguridad, funcionalidad, soporte, calidad, usabilidad y adopción respectivamente). Consigue analizar estos datos gracias a las diferentes funciones de PyGithub.
+	\item Como se verá más adelante, en esta plantilla el usuario podrá manejar los datos a su antojo y, una vez esté de acuerdo, mandarlos para su calificación junto con su dirección de correo para recibir el análisis en su bandeja de entrada si así lo desea.
+	\item Mediante otra petición GET se mandan todos estos datos y se calculan las calificaciones.
+	\item Views.py puntúa el repositorio en función de los datos obtenidos y/o introducidos por el usuario y el valor que les haya querido dar con la siguiente fórmula: \begin{verbatim}
+	nota ponderada = nota * valor
+	\end{verbatim}
+	siendo la nota la calificación del 1 al 10 del dato en cuestión y valor el número que haya introducido el usuario en ese apartado dividido por 100. En apartados posteriores se explica cómo se obtiene cada nota más en profundidad.
+	\item Como el estándar de OpenBRR da una calificación del 1 al 5, la nota final de cada parámetro se divide entre 2 con un redondeo de 2 decimales. Se aplica la siguiente fórmula:
+	\begin{verbatim}
+	nota final parámetro = suma notas ponderadas / 2
+	\end{verbatim}
+	\item La nota final del repositorio se obtiene como la media de las notas de los 7 parámetros:
+	\begin{verbatim}
+	nota final = suma de las notas de los parámetros / 7
+	\end{verbatim}
+	\item Finalmente, views.py sirve la plantilla ''result.html'' y manda un correo al usuario (si así lo ha indicado) con los resultados del análisis y las calificaciones sobre 5.
+\end{enumerate}
+
 
  
 Recuerda que toda figura que añadas a tu memoria debe ser explicada.
