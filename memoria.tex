@@ -511,7 +511,7 @@ En este capítulo se detallará cómo funciona la aplicación desde el código h
 \section{Arquitectura general} 
 \label{sec:arquitectura}
 
-Como se puede observar en la figura 4.1 el programa principal depende del usuario, PyGithub y de GitHub. Como se ha explicado anteriormente, el usuario debe introducir la dirección de un repositorio, compuesta por ''usuario\textunderscore de\textunderscore GitHub/nombre\textunderscore del\textunderscore repositorio'' y PyGithub se encarga de pedir los datos a Github y devolvérselos al programa principal. Vamos a ver esta parte con más detalle.
+Como se puede observar en la figura~\ref{fig:arquitectura principal} el programa principal depende del usuario, PyGithub y de GitHub. Como se ha explicado anteriormente, el usuario debe introducir la dirección de un repositorio, compuesta por ''usuario\textunderscore de\textunderscore GitHub/nombre\textunderscore del\textunderscore repositorio'' y PyGithub se encarga de pedir los datos a Github y devolvérselos al programa principal. Vamos a ver esta parte con más detalle.
 
 Una vez que el usuario introduce el repositorio, el programa principal, gracias a Django, manda una petición GET\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Methods/GET}}  a través de la cual se obtiene el repositorio con la función get\textunderscore repository del paquete analize\textunderscore repo.py creado por mí. Este paquete contiene las funciones necesarias para obtener los datos del repositorio. A continuación se crean 7 listas, una por cada parámetro de OpenBRR, en el fichero views.py donde se irán guardando los datos del repositorio.
 
@@ -545,7 +545,61 @@ Este fichero forma parte de la estructura de Django y tiene dos funciones princi
 	\item Finalmente, views.py sirve la plantilla ''result.html'' y manda un correo al usuario (si así lo ha indicado) con los resultados del análisis y las calificaciones sobre 5.
 \end{enumerate}
 
+\subsubsection{Envío del correo}
 
+Para el envío del correo se utiliza la función ''send\textunderscore mail'' de django.core.mail la cual nos permite enviar correos definiendo el asunto, el mensaje y la dirección de correo desde la que se enviará. Se debe configurar previamente el fichero ''settings.py'' de Django añadiendo los siguientes campos:
+
+\begin{verbatim}
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "tu_direccion_de_correo@gmail.com"
+EMAIL_HOST_PASSWORD = config["EMAIL_PASSWORD"]
+\end{verbatim}
+
+''EMAIL\textunderscore PASSWORD'' es la contraseña generada por Gmail\footnote{\url{https://www.gmail.com/mail/help/intl/es/about.html?iframe}} para estos tipos de servicios y que va guardada en un fichero ''credentials.env'' para no ser desvelada en el repositorio. Para generar esta contraseña debes entrar en el apartado de seguridad de tu cuenta de Google{\url{https://myaccount.google.com/security}} pulsando en el apartado ''Contraseñas para aplicaciones'' tal y como se indica en la figura ~\ref{fig:contraseña gmail}.
+
+\begin{figure}
+    \centering
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/contraseña_gmail.png}
+    \caption{Apartado para generar la contraseña de Gmail}\label{fig:contraseña gmail}
+\end{figure}
+
+\subsection{PyGithub}
+
+PyGithub es la librería encargada de recibir la dirección del repositorio y obtener los datos necesarios para su posterior análisis. Funciona de la siguiente manera:
+
+\begin{enumerate}
+	\item En primer lugar obtiene el repositorio con la función ''get\textunderscore repo()'' a la que se le pasa como argumento la dirección del repositorio.
+	\item Una vez hecho esto se obtiene un objeto repositorio como el de la figura~\ref{fig:Objeto repositorio de PyGithub} donde se ha puesto de ejemplo el repositorio ''moodle/moodle''\footnote{\url{https://github.com/moodle/moodle}}
+	\item A partir de aquí se obtienen los datos correspondientes a cada apartado gracias a las funciones que nos brinda PyGithub y que podemos observar en la figura~\ref{fig:Objeto repositorio de PyGithub} (size, pushed\textunderscore at o subscribers\textunderscore count son algunos ejemplos). 
+\end{enumerate}
+
+Cabe añadir la restricción con la que cuenta esta librería. PyGithub limita las peticiones que puedes realizar durante una hora y, si excedes esas peticiones, devolverá la excepción ''RateLimitExceededException'' con el siguiente mensaje:\footnote{\url{https://docs.github.com/rest/overview/
+  resources-in-the-rest-api#rate-limiting}} \begin{verbatim}
+github.GithubException.RateLimitExceededException: 403 
+{"message": "API rate limit exceeded for 84.78.50.170. 
+(But here's the good news: Authenticated requests get
+ a higher rate limit. Check out the documentation
+  for more details.)", "documentation_url": 
+  "https://docs.github.com/rest/overview/
+  resources-in-the-rest-api#rate-limiting"} 
+\end{verbatim} lo cual ha sido controlado en el fichero views.py visto anteriormente haciendo que muestre la plantilla ''overflow.html'' que se corresponde con una página que informa al usuario del error y le permite volver a la página principal como se observa en la figura~\ref{fig:error overflow}.
+
+\begin{figure}
+    \centering
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/objeto_repositorio.png}
+    \caption{Objeto repositorio de PyGithub}\label{fig:Objeto repositorio de PyGithub}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/overflow.png}
+    \caption{Overflow.html}\label{fig:error overflow}
+\end{figure}
+
+\subsection{Django y JS}
  
 Recuerda que toda figura que añadas a tu memoria debe ser explicada.
 Sí, aunque te parezca evidente lo que se ve en la figura~\ref{fig:arquitectura}, la figura en sí solamente es un apoyo a tu texto.
