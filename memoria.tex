@@ -522,6 +522,7 @@ Una vez que el usuario introduce el repositorio, el programa principal, gracias 
 \end{figure}
 
 \subsection{Fichero views.py}
+\label{sec:views.py}
 
 Este fichero forma parte de la estructura de Django y tiene dos funciones principales: recibir las peticiones GET y, en función de dichas peticiones, servir la plantilla HTML correspondiente y organizar los datos extraídos del repositorio a analizar. Funciona de la siguiente manera:
 
@@ -599,14 +600,134 @@ github.GithubException.RateLimitExceededException: 403
     \caption{Overflow.html}\label{fig:error overflow}
 \end{figure}
 
-\subsection{Django y JS}
- 
-Recuerda que toda figura que añadas a tu memoria debe ser explicada.
-Sí, aunque te parezca evidente lo que se ve en la figura~\ref{fig:arquitectura}, la figura en sí solamente es un apoyo a tu texto.
-Así que explica lo que se ve en la figura, haciendo referencia a la misma tal y como ves aquí.
-Por ejemplo: En la figura~\ref{fig:arquitectura} se puede ver que la estructura del \emph{parser} básico, que consta de seis componentes diferentes: los datos se obtienen de la red, y según el tipo de dato, se pasará a un \emph{parser} específico y bla, bla, bla\ldots
+\subsection{Django}
 
-Si utilizas una base de datos, no te olvides de incluir también un diagrama de entidad-relación.
+Django es el framework de Python que se encarga de gestionar la página web mediante el envío de formularios. Consta de varios ficheros, entre ellos el fichero views.py explicado en el apartado~\ref{sec:views.py}.
+
+Los formularios son enviados mediante el método GET como en el siguiente ejemplo:
+
+\begin{verbatim}
+text=ivanmiguelmolinero%2FTFG
+\end{verbatim}
+
+Se usan parejas de clave-valor, donde la clave es el nombre del campo a rellenar y valor lo que haya introducido el usuario. El ejemplo mostrado es el correspondiente a introducir en la pantalla principal el valor ''ivanmiguelmolinero/TFG'' como se puede ver en la figura~\ref{fig:ivanmiguelmolinero/TFG}.
+
+\begin{figure}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/maintfg.png}
+    \caption{Página principal con el formulario relleno}\label{fig:ivanmiguelmolinero/TFG}
+\end{figure}
+
+A continuación se pasan a explicar cada uno de los ficheros de importancia de Django.
+
+\subsubsection{urls.py}
+
+Es el fichero encargado de gestionar las peticiones que le llegan comunicándose con views.py. El usuario lanza una petición y, en función de esta, este fichero activa una función u otra de views.py. Por ejemplo, si el usuario introduce la dirección raíz, urls.py se encarga de que se acabe mostrando la página principal mediante la función views.post\textunderscore main. Las otras dos URLS que debe gestionar se corresponden con el envío del formulario de la página principal (figura~\ref{fig:ivanmiguelmolinero/TFG}) y el envío del formulario de repo\textunderscore data.html
+
+\subsubsection{forms.py}
+
+Fichero que define el modelo de formulario a utilizar
+
+\subsubsection{models.py}
+
+Fichero que da forma al modelo definido en forms.py
+
+\subsubsection{settings.py}
+
+Este es el fichero de configuración de Django, en él se deben especificar:
+
+\begin{itemize}
+	\item Directorio donde está guardado el fichero credentials.py correspondiente a las credenciales de Gmail necesarias para el envío del correo.
+	\item Directorio base a partir del cual funcionará la aplicación.
+	\item Clave secreta.
+	\item Hosts permitidos: en este caso son 127.0.0.0 (localhost) y pythonanywhere.com.
+	\item Las apps instaladas en el sitio.
+	\item La lógica de intercambio de información o middleware\cite{website:middleware}.
+	\item La definición de las plantillas.
+	\item La base de datos donde se guardarían diferentes valores si se necesitara.
+	\item El idioma del lenguaje.
+	\item La zona horaria.
+	\item La URL y el directorio raíz.
+	\item Los valores necesarios para el envío del correo: EMAIL\textunderscore BACKEND, EMAIL\textunderscore HOST, EMAIL\textunderscore USE\textunderscore TLS, EMAIL\textunderscore PORT, EMAIL\textunderscore HOST\textunderscore USER y EMAIL\textunderscore HOST\textunderscore PASSWORD.
+\end{itemize}
+
+\subsubsection{manage.py}
+
+Es el fichero encargado de iniciar el servidor como se indica en el manual de usuario y gestionar el error de no haber instalado correctamente Django. Funcion mediante el siguiente comando:
+
+\begin{verbatim}
+	python manage.py runserver
+\end{verbatim}
+
+\subsection{Javascript}
+
+Los ficheros javascript son los encargados de la interacción aplicación-usuario. En el caso de esta aplicación, la plantilla repo\textunderscore data.html funciona gracias al fichero datos.js
+
+\subsubsection{datos.js}
+
+Controla que el usuario pueda ocultar y mostrar las pestañas de los parámetros de OpenBRR, controla que no pueda introducir valores superiores al 100\% (función edit\textunderscore max\textunderscore value\textunderscore [parámetro] y get\textunderscore suma) y que pueda modificar los datos mostrados (función save\textunderscore input\textunderscore [parámetro]). Además, controla que solo pueda enviar el formulario si se están mostrando para evitar el error de enviar el formulario vacío.
+
+\subsection{Plantillas HTML}
+
+Es lo que se muestra al usuario una vez renderizadas. La aplicación cuenta con las siguientes:
+
+\begin{itemize}
+	\item \textbf{Main.html:} Correspondiente a la página principal muestra el nombre de la aplicación y el formulario para enviar el nombre del repositorio a analizar.
+	\item \textbf{Repo\textunderscore data.html:} Muestra los datos del repositorio en diferentes pestañas que el usuario puede mostrar u ocultar. También puede modificar esos datos. Al final hay un formulario para introducir su dirección de correo donde recibirá los resultados de su análisis.
+	\item \textbf{Result.html:} Muestra la calificación final de cada uno de los parámetros y del repositorio.
+	\item \textbf{Error.html:} Página que se muestra si el repositorio introducido no existe. Permite al usuario volver a la página principal.
+	\item \textbf{Overflow.html:} Página que se muestra cuando se excede el número de peticiones a Github. Permite al usuario volver a la página principal.
+\end{itemize}
+
+\subsection{Ficheros CSS}
+
+Son los que dan estilo a cada una de las plantillas HTML.
+
+\subsection{Ejemplo de uso}
+
+De la figura~\ref{fig:ivanmiguelmolinero/TFG} a la figura~\ref{fig:resultados_3} tenemos un ejemplo analizando el repositorio de este TFG.
+
+\begin{figure}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_off.png}
+    \caption{Página de datos con las pestañas ocultas.}\label{fig:pestañas_off}
+\end{figure}
+
+\begin{figure}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_1.png}
+    \caption{Primera parte de la página de datos.}\label{fig:pestañas_1}
+\end{figure}
+
+\begin{figure}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_2.png}
+    \caption{Segunda parte de la página de datos.}\label{fig:pestañas_2}
+\end{figure}
+
+\begin{figure}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_3.png}
+    \caption{Tercera parte de la página de datos.}\label{fig:pestañas_3}
+\end{figure}
+
+\begin{figure}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/resultados_1.png}
+    \caption{Primera parte de la página de resultados.}\label{fig:resultados_1}
+\end{figure}
+
+\begin{figure}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/resultados_2.png}
+    \caption{Segunda parte de la página de resultados.}\label{fig:resultados_2}
+\end{figure}
+
+\begin{figure}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/resultados_3.png}
+    \caption{Tercera parte de la página de resultados.}\label{fig:resultados_3}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
