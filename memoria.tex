@@ -738,10 +738,199 @@ De la figura~\ref{fig:ivanmiguelmolinero/TFG} a la figura~\ref{fig:resultados_3}
 \cleardoublepage
 \chapter{Experimentos y validación}
 
-Este capítulo se introdujo como requisito en 2019. 
-Describe los experimentos y casos de test que tuviste que implementar para validar tus resultados. 
-Incluye también los resultados de validación que permiten afirmar que tus resultados son correctos. 
+En este capítulo se explicarán las diferentes pruebas que se fueron haciendo durante el desarrollo de este proyectos con los diferentes paquetes y frameworks.
 
+\section{Perceval}
+
+Esta fue la librería propuesta inicialmente por mi tutor. Realicé varias pruebas siguiendo los pasos indicados en su página\footnote{\url{https://perceval.readthedocs.io/en/latest/perceval/git.html#using-perceval-as-a-python-module}} pero debido a su complejidad y que solo conseguía que funcionara en Linux\footnote{\url{https://www.linux.org/}} se terminó descartando en favor de PyGithub. En la figura~\ref{fig:perceval} podemos observar un programa de prueba con Perceval que extraía los ''pull request'' y los ''issues'' de un repositorio.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/perceval.png}
+    \caption{Programa de prueba de Perceval.}\label{fig:perceval}
+\end{figure}
+
+\section{PyGithub}
+
+Por los motivos explicados anteriormente se descartó Perceval y se reemplazó por PyGithub. Al principio, se hicieron diferentes pruebas con diferentes funciones de esta librería para comprobar su correcto funcionamiento antes de implementarla en la aplicación final. Se seleccionó como repositorio de pruebas el propio de PyGithub\footnote{\url{https://github.com/pygithub/pygithub}} y se extrajeron diferentes datos que fueran fácilmente comprobables desde la página de Github. De la figura~\ref{fig:pygithub_1} a la figura~\ref{fig:pestañas_3} podemos ver el programa de prueba resultante y en la figura~\ref{fig:pygithub_salida} su salida. Finalmente, de la figura~\ref{fig:pygithub_commits} a la figura~\ref{fig:pygithub_lenguajes} observamos los datos mostrados por el propio repositorio y comprobamos que se corresponden con los obtenidos por la salida del programa de prueba. Por tanto, el programa funciona correctamente.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_1.png}
+    \caption{Primera parte del programa de prueba de PyGithub.}\label{fig:pygithub_1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_2.png}
+    \caption{Segunda parte del programa de prueba de PyGithub.}\label{fig:pygithub_2}
+\end{figure}
+  
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_3.png}
+    \caption{Tercera parte del programa de prueba de PyGithub.}\label{fig:pygithub_3}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_salida.png}
+    \caption{Salida del programa de prueba de PyGithub.}\label{fig:pygithub_salida}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_commits.png}
+    \caption{Número de commits de PyGithub.}\label{fig:pygithub_commits}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_forks.png}
+    \caption{Número de forks de PyGithub.}\label{fig:pygithub_forks}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_lenguajes.png}
+    \caption{Lenguajes utilizados en el repositorio de PyGithub.}\label{fig:pygithub_lenguajes}
+\end{figure}
+
+\section{Pruebas con la aplicación}
+
+Una vez comprobado el correcto funcionamiento de PyGithub, se implementa en la aplicación junto con Django. Para corroborar que las peticiones se envían y el repositorio se analiza correctamente, rellenamos el formulario inicial con el repositorio de PyGithub (como en el apartado anterior) para ver si los datos obtenidos coinciden. La página principal queda tal y como observamos en la figura~\ref{fig:pricipal_pygithub}. Finalmente, en la ventana de datos que podemos ver en la figura~\ref{fig:comunidad_pygithub} observamos que los datos obtenidos coinciden con los obtenidos en la figura~\ref{fig:pygithub_salida} y que, por tanto, la implementación ha sido un éxito.
+
+\subsection{Pruebas con views.py}
+
+Como se ha explicado en el apartado~\ref{sec:views.py} este fichero es muy importante para el correcto funcionamiento de la aplicación, por ello es de vital importancia asegurarse de que funciona perfectamente. Debido a su extensión, se explicarán las pruebas que se hicieron poniendo de ejemplo la pestaña comunidad de la figura~\ref{fig:comunidad_pygithub} y se darán por explicadas todas las demás ya que, además, su funcionamiento es exactamente el mismo.
+
+Views.py se encarga, entre otras muchas cosas, de recoger los datos enviados por el usuario en el formulario y obtener la calificación de cada apartado y la calificación final del repositorio. Para la pestaña comunidad, como no se han modificado los valores de la aportación de cada dato, se obtiene su calificación final sobre 5 con la siguiente fórmula:
+
+\begin{verbatim}
+nota final = (nota commits * 0.2 + nota forks * 0.2
++ nota suscriptores * 0.2 + nota organización * 0.2 
++ nota actualización * 0.2)/2
+\end{verbatim}
+
+Para el cálculo de la calificación de cada dato en concreto se usan los métodos que podemos ver de la figura~\ref{fig:nota_commits} a la figura~\ref{fig:nota_actualización} en función del número introducido por el usuario en el formulario de la figura~\ref{fig:comunidad_pygithub}. Cabe destacar que, en caso de tratarse de un formulario de ''sí o no'' la nota es binaria, es decir, un 10 si cumple el requisito o un 0 si no lo cumple. Esto lo podemos ver en la figura~\ref{fig:nota_organización}.
+
+Si obtenemos la nota final a mano obtenemos que la nota de cada apartado es:
+
+\begin{verbatim}
+nota commits = 10
+nota forks = 10
+nota suscriptores = 10
+nota organización = 10
+nota actualización = 7.5
+\end{verbatim}
+
+Por tanto, aplicando la fórmula anterior obtenemos una calificación de 4.75 que es lo mismo que ha calculado la aplicación como vemos en la figura~\ref{fig:test_comunidad} así que funciona correctamente. Por último, comprobamos que obtiene de manera correcta la nota media de todos los apartados. A mano, calculamos la nota final sumando las notas de cada apartado, que podemos observar de la figura~\ref{fig:test_comunidad} a la figura~\ref{fig:test_adopción_y_notafinal} y dividiendo entre 7 para obtener una nota final de:
+
+\begin{verbatim}
+nota final = (4.75 + 4.38 + 2.06 + 2.5 + 0 + 5 + 5)/ 7 = 3.38
+\end{verbatim}
+
+Como vemos en esta última figura, la aplicación ha calculado la nota correctamente y podemos concluir que funciona.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/principal_main.png}
+    \caption{Página principal antes de analizar PyGithub.}\label{fig:pricipal_pygithub}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_comunidad.png}
+    \caption{Pestaña de comunidad de PyGithub.}\label{fig:comunidad_pygithub}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_commits.png}
+    \caption{Obtención de la calificación en función del número de commits.}\label{fig:nota_commits}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_forks.png}
+    \caption{Obtención de la calificación en función del número de forks.}\label{fig:nota_forks}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_suscriptores.png}
+    \caption{Obtención de la calificación en función del número de suscriptores.}\label{fig:nota_suscriptores}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_organización.png}
+    \caption{Obtención de la calificación en función de si pertenece a una organización.}\label{fig:nota_organización}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_actualización.png}
+    \caption{Obtención de la calificación en función de la fecha de última actualización.}\label{fig:nota_actualización}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_comunidad.png}
+    \caption{Calificación de comunidad obtenida por la aplicación.}\label{fig:test_comunidad}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_seguridad.png}
+    \caption{Calificación de seguridad obtenida por la aplicación.}\label{fig:test_seguridad}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_funcionalidad.png}
+    \caption{Calificación de funcionalidad obtenida por la aplicación.}\label{fig:test_funcionalidad}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_soporte.png}
+    \caption{Calificación de soporte obtenida por la aplicación.}\label{fig:test_soporte}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_calidad.png}
+    \caption{Calificación de calidad obtenida por la aplicación.}\label{fig:test_calidad}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_usabilidad.png}
+    \caption{Calificación de usabilidad obtenida por la aplicación.}\label{fig:test_usabilidad}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_adopción_y_notafinal.png}
+    \caption{Calificación de adopción y nota final obtenida por la aplicación.}\label{fig:test_adopción_y_notafinal}
+\end{figure}
+
+\subsubsection{Envío del correo}
+
+Finalmente, el fichero views.py envía al usuario un mensaje a su dirección de correo que ha indicado con los mismos datos que podemos observar de la la figura~\ref{fig:test_comunidad} a la figura~\ref{fig:test_adopción_y_notafinal} por si quiere guardar ese análisis. Para comprobar su correcto funcionamiento indico mi dirección de correo en el formulario de la figura~\ref{fig:envio_correo}. Como podemos observar en la figura~\ref{fig:correo} los datos coinciden. El envío del correo es un éxito.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/envio_correo.png}
+    \caption{Formulario rellenado con mi propia dirección de correo.}\label{fig:envio_correo}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[ keepaspectratio]{img/correo.png}
+    \caption{Mensaje enviado por la aplicación.}\label{fig:correo}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
