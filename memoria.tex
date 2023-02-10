@@ -147,8 +147,9 @@ Maestro Yoda}
 %\addcontentsline{toc}{chapter}{Agradecimientos} % si queremos que aparezca en el índice
 \markboth{AGRADECIMIENTOS}{AGRADECIMIENTOS} % encabezado 
 
-Aquí vienen los agradecimientos\ldots Aunque está bien acordarse de la pareja, no hay que olvidarse de dar las gracias a tu madre, que aunque a veces no lo parezca disfrutará tanto de tus logros como tú\ldots 
-Además, la pareja quizás no sea para siempre, pero tu madre sí.
+Siete años después he conseguido llegar hasta aquí, aunque hubo momentos en los que quise abandonar, nunca me rendí y he logrado terminar la carrera. Esto no hubiera sido posible, en primer y principal lugar, sin mis padres. Siempre han estado ahí, apoyándome, animándome, pagándome todo lo que necesitara, valiera lo que valiera como el ordenador desde el que escribo estas líneas o las asignaturas en las que llegué a tercera matrícula o incluso quinta. Gracias, Jose y Yoli, gracias, papá y mamá, sin vosotros esto hubiera sido imposible. Os quiero.
+De esta carrera también me llevo a una nueva familia. ¿Quién iba a decirme que terminaría amando lo que en 2017 describía como una pedanía? Hablo de Jaén y del hermano y hermana que me llevo para siempre. Gracias por confiar en mí incluso cuando ni yo lo hacía. Siempre habéis estado ahí para mí, escuchando cada audio durase lo que durase, hablase de lo que hablase, desde lo enfadado que estaba por que había perdido el Madrid hasta mis penas y alegrías. Me enseñasteis lo que es una amistad de verdad, gracias. Agradecer también a personas que pasaron por mi vida durante esta etapa y que me enseñaron a ''no ocuparme antes de ocuparme'', a mi psicóloga que me enseñó que casi nada esta vida es catastrófico y me dio las herramientas para poder sacar mi mejor versión cuando ni yo sabía lo que me pasaba. También quiero agradecer a todos los compañeros que he tenido en la carrera, entre todos nos hicimos la vida un poco más fácil. Gracias, claro, a mi equipo, el Real Madrid que me enseñó a luchar ''hasta el final'' como reza el tatuaje que llevo en el brazo.
+Para terminar, dar las gracias al C.E.I.P. Pío Baroja, al I.E.S. Manuel de Falla de Móstoles y a la Universidad Rey Juan Carlos de Fuenlabrada por formarme como persona y como profesional así como a los espectaculares profesores que he tenido a lo largo de mi vida como Sara, Diego, Susana, Juan y, en especial, mi tutor del TFG quien desde el minuto uno me transmitió su pasión por Python y la programación. Gracias a todos y a por más.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Resumen
@@ -157,17 +158,15 @@ Además, la pareja quizás no sea para siempre, pero tu madre sí.
 %\addcontentsline{toc}{chapter}{Resumen} % si queremos que aparezca en el índice
 \markboth{RESUMEN}{RESUMEN} % encabezado
 
-Aquí viene un resumen del proyecto.
-Ha de constar de tres o cuatro párrafos, donde se presente de manera clara y concisa de qué va el proyecto. 
-Han de quedar respondidas las siguientes preguntas:
+Inicié este proyecto con el objetivo de seguir creciendo como desarrollador y, a la vez, crear una herramienta que fuera de utilidad para más desarrolladores como yo. A la hora de buscar herramientas en Github impresiona la gran cantidad de ellas que hay y, para desarolladores novatos como yo (y no tan novatos) es difícil distinguir las mejores opciones.
 
-\begin{itemize}
-  \item ¿De qué va este proyecto? ¿Cuál es su objetivo principal?
-  \item ¿Cómo se ha realizado? ¿Qué tecnologías están involucradas?
-  \item ¿En qué contexto se ha realizado el proyecto? ¿Es un proyecto dentro de un marco general?
-\end{itemize}
+Es por eso que nació este proyecto, para permitir a los desarrolladores analizar los respositorios de una manera más rápida y eficaz. El objetivo final sería poder analizar una gran cantidad de repositorios al mismo tiempo con esta aplicación.
 
-Lo mejor es escribir el resumen al final.
+Estos objetivos no son nuevos, ya los han tenido diferentes proyectos como OpenBRR el cual se eligió usar y ampliar ya que se centra en los aspectos más importantes de los proyectos. Además, es de código abierto, lo que siempre facilita las cosas.
+
+Pero el uso de esta aplicación no está centrado solo en desarrolladores noveles, también se puede usar en el ámbito educativo para que los profesores puedan elegir qué repositorios recomendar a sus alumnos. 
+
+Finalmente, indicar que este proyecto se ha realizado con Python, Django, HTML, CSS  y JS, tecnologías que he ido aprendiendo durante mi estancia en la universidad.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Resumen en inglés
@@ -176,10 +175,15 @@ Lo mejor es escribir el resumen al final.
 %\addcontentsline{toc}{chapter}{Summary} % si queremos que aparezca en el índice
 \markboth{SUMMARY}{SUMMARY} % encabezado
 
-Here comes a translation of the ``Resumen'' into English. 
-Please, double check it for correct grammar and spelling.
-As it is the translation of the ``Resumen'', which is supposed to be written at the end, this as well should be filled out just before submitting.
+I started this project with the aim of continuing to grow as a developer and, at the same time, to create a tool that would be useful for more developers like me. When looking for tools on Github, it is impressive how many tools there are and, for novice developers like me (and not so novice) it is difficult to distinguish the best options.
 
+That's why this project was born, to allow developers to analyse repositories in a faster and more efficient way. The ultimate goal would be to be able to analyse a large number of repositories at the same time with this application.
+
+These goals are not new, they have already been achieved by different projects such as OpenBRR which was chosen to use and extend as it focuses on the most important aspects of the projects. Moreover, it is open source, which always makes things easier.
+
+But the use of this application is not only focused on novice developers, it can also be used in the educational field so that teachers can choose which repositories to recommend to their students. 
+
+Finally, this project has been done with Python, Django, HTML, CSS and JS, technologies that I have been learning during my stay at the university.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -236,13 +240,20 @@ buscar vulnerabilidades, descargarlo, probarlo , etc. En cambio, gracias a este 
 \label{sec:estructura}
 
 \begin{itemize}
-  \item Capítulo~\ref{chap:introducción}: se explica brevemente el origen del proyecto, sus bases y funcionamiento .
+  \item \textbf{Capítulo~\ref{chap:introducción}:} se explica brevemente el origen del proyecto, sus bases y funcionamiento .
   
-  \item Capítulo~\ref{chap:objetivos}: se muestran los objetivos del proyecto.
+  \item \textbf{Capítulo~\ref{chap:objetivos}:} se muestran los objetivos del proyecto.
   
-  \item A continuación se presenta el estado del arte en el capítulo~\ref{chap:estado}.
+  \item \textbf{Capítulo~\ref{chap:estado}:} se explica cada tecnología usada en este proyecto.
   
-  \item \ldots
+  \item \textbf{Capítulo~\ref{chap:diseño}:} aquí se entra en detalle en el funcionamiento de la aplicación.
+  
+  \item \textbf{Capítulo~\ref{chap:experimentos}:} se muestran los diferentes experimentos y se prueba el correcto funcionamiento de la aplicación.
+  
+  \item \textbf{Capítulo~\ref{chap:resultados}:} se explican los resultados obtenidos poniendo de prueba varios repositorios.
+  
+  \item \textbf{Capítulo~\ref{chap:conclusiones}:} se indican los resultados conseguidos y la solución a los objetivos no conseguidos.
+  
 \end{itemize}
 
 
@@ -505,6 +516,7 @@ El esquema de análisis se puede ver en la figura 3.2. Aparte de los parámetros
 
 \cleardoublepage
 \chapter{Diseño e implementación}
+\label{chap:diseño}
 
 En este capítulo se detallará cómo funciona la aplicación desde el código hasta las funciones que debe realizar el usuario.
 
@@ -940,6 +952,7 @@ Finalmente, el fichero views.py envía al usuario un mensaje a su dirección de 
 
 \cleardoublepage
 \chapter{Resultados}
+\label{chap:resultados}
 
 Una vez hechas las pruebas explicadas en el capítulo~\ref{chap:experimentos} se pasa a comprobar que la aplicación devuelve resultados coherentes, es decir, que a repositorios teóricamente buenos les da una buena calificación y a repositorios prácticamente vacíos (como el de la prueba que se mostrará en el apartado~\ref{sec:vacio}) les da una mala calificación.
 
@@ -1154,7 +1167,7 @@ En primer lugar se explicarán los objetivos conseguidos y a continuación la so
 	\item Se ha entendido la utilidad y necesidad de usar tecnologías como OpenBRR para poder analizar qué códigos y/o repositorios son mejores que otros. Hay una cantidad ingente de proyectos y estas tecnologías son necesarias para distinguir cuáles son los más válidos. OpenBRR hace un análisis inteligente ya que se basa en los parámetros más esenciales.
 	\item La librería PyGithub se ha entendido a la perfección a la hora de sacar los datos necesarios para un análisis de repositorio. Esta librería también es útil para gestionar Github pero ha quedado pendiente aprender esta utilidad ya que no era necesaria para el proyecto.
 	\item El envío de formularios con Django funciona correctamente en la aplicación.
-	\item A la hora de modificar los datos se encontró el problema de que la aplicación no recordaba los cambios pero se pudo solucionar con las funciones ''save\textunderscore inpunt'' de ''datos.js''.
+	\item A la hora de modificar los datos se encontró el problema de que la aplicación no recordaba los cambios pero se pudo solucionar con las funciones ''save\textunderscore input'' de ''datos.js''.
 	\item En un principio no sabía qué ponderación dar a cada dato/parámetro pero con ayuda de mi tutor decidimos que lo mejor es que el usuario decidiera este asunto por lo que se le dio la opción de poder modificarlo quedando un reparto equitativo como opción por defecto. Así se consiguieron resultados coherentes.
 	\item Se solucionó error causado cuandoel usuario introduce un repositorio que no existe dándole la posibilidad de volver a la página inicial.
 	\item Investigando las diversas funcionalidades de Django di con una que permitía el envío de correos por lo que decidí implementarlo de forma extra en mi proyecto para dar la posibilidad al usuario de guardar los resultados en un sitio seguro.
@@ -1176,31 +1189,44 @@ En primer lugar se explicarán los objetivos conseguidos y a continuación la so
 \section{Aplicación de lo aprendido}
 \label{sec:aplicacion}
 
-Aquí viene lo que has aprendido durante el Grado/Máster y que has aplicado en el TFG/TFM. Una buena idea es poner las asignaturas más relacionadas y comentar en un párrafo los conocimientos y habilidades puestos en práctica.
+Para la realización de este TFG he aplicado los conocimientos adquiridos en las diferentes asignaturas de programación que hay durante el grado así como un asignatura de primero a la hora de redactar la memoria.
 
 \begin{enumerate}
-  \item a
-  \item b
+  \item \textbf{Expresión Oral y Escrita y Búsqueda de Información:} Me ha ayudado a realizar una correcta redacción de la memoria y buscar información de forma eficaz.
+  \item \textbf{Informática I:} Cuando estudie esta asignatura en 2016, me enseñaron Picky pero aún así pude aprender los fundamentos de la programación y las sintaxis básicas.
+  \item \textbf{Protocolos para la Transmisión de Audio y Vídeo en Internet:} En esta asignatura aprendí a programar en Python, el lenguaje con el que está desarrollada esta aplicación en su mayoría.
+  \item \textbf{Construcción de Servicios y Aplicaciones Audiovisuales en Internet:} Gracias a esta asignatura aprendí HTML, CSS y Javascript y me inicié en el desarrollo web del lado del cliente. Con estos lenguajes funcionan las diferentes ventanas de este proyecto.
+  \item \textbf{Laboratorio de Tecnologías Audiovisuales en la Web:} En esta asignatura aprendí a desarrollar el lado del servidor en una página web lo que ha sido de mucha ayuda a la hora de entender fácilmente Django.
 \end{enumerate}
 
 
 \section{Lecciones aprendidas}
 \label{sec:lecciones_aprendidas}
 
-Aquí viene lo que has aprendido en el Trabajo Fin de Grado/Máster.
+Con lo aprendido durante el grado no fue suficiente así que tuve que adquirir diversos conocimientos para poder realizar el TFG.
 
 \begin{enumerate}
-  \item Aquí viene uno.
-  \item Aquí viene otro.
+  \item Aprender a gestionar y aprovechar mejor el tiempo en un proyecto más largo que cualquier trabajo de clase.
+  \item Entender y utilizar Django.
+  \item Entender y utilizar PyGithub.
+  \item Avanzar en mis conocimientos de Github y aprender que no se trata simplemente de un repositorio donde subir tus proyectos si no que también ayuda a gestionarlos, buscar errores, colaborar con otros desarrolladores, etc.
+  \item Aprender a realizar un manual de usuario.
+  \item Afianzar mis conocimientos sobre programación y programar de una manera más limpia.
+  \item Aprender a utilizar \LaTeX  para la redacción de la memoria.
 \end{enumerate}
 
 
 \section{Trabajos futuros}
 \label{sec:trabajos_futuros}
 
-Ningún proyecto ni software se termina, así que aquí vienen ideas y funcionalidades que estaría bien tener implementadas en el futuro.
+Como todo proyecto de software, este TFG no está terminado ni mucho menos. Siempre se puede mejorar su optimización o añadir nuevas mejoras y funcionalidades. A continuación se mencionan algunas:
 
-Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
+\begin{itemize}
+	\item Corregir el error que no permite enviar el formulario si las pestañas están ocultas.
+	\item Solucionar el error que limita el número de peticiones de PyGithub.
+	\item Añadir una funcionalidad que permita comparar varios repositorios a la vez y que devuelva cuál es el mejor según la necesidad del desarrollador.
+	\item Añadir más datos a analizar en cada parámetro de OpenBRR.
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1213,9 +1239,49 @@ Es un apartado que sirve para dar ideas de cara a futuros TFGs/TFMs.
 \chapter{Manual de usuario}
 \label{app:manual}
 
-Esto es un apéndice.
-Si has creado una aplicación, siempre viene bien tener un manual de usuario.
-Pues ponlo aquí.
+Esta aplicación permite analizar un repositorio de Github según los parámetros de OpenBRR.
+
+\section{Instalación}
+
+Para instalar y poder usar esta aplicación en tu ordenador personal debes dirigirte al repositorio ''ivanmiguelmolinero/TFG''\footnote{\url{https://github.com/ivanmiguelmolinero/TFG}} y clonarlo en un directorio local. A continuación deberás instalar Django en tu entorno. Para ello abre una ventana de comandos y ejecuta el siguiente comando:
+
+\begin{verbatim}
+pip install django
+\end{verbatim}
+
+Se empezará a instalar y, una vez te indique que la instalación ha sido realizada con éxito, estará todo listo para comenzar a usar la aplicación.
+
+\subsection{Configuración del correo.}
+
+Para configurar la funcionalidad del envío del correo tendremos que dirigirnos a la carpeta ''mysite'' y:
+
+\begin{enumerate}
+	\item En el fichero settings.py cambiar el valor de ''EMAIL\textunderscore HOST\textunderscore USER'' por tu propia dirección de correo.
+	\item Crear un fichero ''credentials.env'' donde introduciremos lo siguiente:
+	\begin{verbatim}
+	EMAIL_USER = ejemplo@gmail.com
+	EMAIL_PASSWORD = contraseña
+	\end{verbatim}
+	\item El valor del campo contraseña se obtiene en \url{https://myaccount.google.com/security} en el apartado ''Iniciar sesión en Google'' $">"$ ''Contraseñas de aplicaciones''.
+\end{enumerate}
+
+\section{Iniciar la aplicación.}
+
+Para iniciar la aplicación debes abrir una ventana de comandos en la carpeta ''Django\textunderscore BRR'' y ejecutar:
+
+\begin{verbatim}
+python manage.py runserver
+\end{verbatim}
+
+\section{Uso de la aplicación.}
+
+Finalmente para utilizar esta aplicación, abrimos un navegador y nos dirigimos a la dirección ''http://127.0.0.1:8000/'' y se nos abrirá la ventana principal (figura~\ref{fig:pricipal_pygithub}).
+
+Una vez ahí, podremos introducir el repositorio que queramos analizar siguiendo la estructura ''usuario/nombre\textunderscore del\textunderscore repositorio'' por ejemplo ''ivanmiguelmolinero/TFG'' donde ivanmiguelmolinero es el usuario del dueño del repositorio y TFG el nombre del repositorio. Pulsamos en ''ANALIZAR'' y nos llevará a la siguiente ventana.
+
+Ya en la ventana de datos (de la figura~\ref{fig:moodle_1} a la figura~\ref{fig:moodle_3}) nos aparecerán los 7 parámetros analizados ocultos en sus correspondientes pestañas. Para poder verlo debemos pulsar en sus correspondientes botones. Podemos cambiar los datos analizados e incluso la ponderación que aporta cada uno. Al final de esta página, de manera opcional, podremos introducir una dirección de correo a la que nos llegaría un mensaje con los resultados del análisis. Pulsamos en ''ENVIAR DATOS'' y nos llevará a la última ventana.
+
+Finalmente, en la ventana de resultados (de la figura~\ref{fig:moodle_4} a la figura~\ref{fig:moodle_6}), vemos la calificación de cada apartado y la calificación final del repositorio.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
