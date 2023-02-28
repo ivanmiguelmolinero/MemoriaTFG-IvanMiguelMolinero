@@ -488,40 +488,20 @@ Como se puede ver en la figura, OpenBRR obtiene el código fuente del proyecto p
 \cleardoublepage
 \chapter{Diseño e implementación}
 \label{chap:diseño}
-En este capítulo se detallará cómo funciona la aplicación desde el código hasta las funciones que debe realizar el usuario.
+En este capítulo se detallará cómo funciona la aplicación desde el código hasta un ejemplo de las diferentes opciones de las que dispone el usuario.
 \section{Arquitectura general} 
 \label{sec:arquitectura}
-Como se puede observar en la figura~\ref{fig:arquitectura principal} el programa principal depende del usuario, PyGitHub y de GitHub. Como se ha explicado anteriormente, el usuario debe introducir la dirección de un repositorio, compuesta por ``usuario\textunderscore de\textunderscore GitHub/nombre\textunderscore del\textunderscore repositorio'' y PyGitHub se encarga de pedir los datos a GitHub y devolvérselos al programa principal. Vamos a ver esta parte con más detalle.
-Una vez que el usuario introduce el repositorio, el programa principal, gracias a Django, manda una petición GET\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Methods/GET}}  a través de la cual se obtiene el repositorio con la función get\textunderscore repository del paquete analize\textunderscore repo.py creado por mí. Este paquete contiene las funciones necesarias para obtener los datos del repositorio. A continuación se crean 7 listas, una por cada parámetro de OpenBRR, en el fichero views.py donde se irán guardando los datos del repositorio.
+Como se puede observar en la figura~\ref{fig:arquitectura principal} el programa principal depende del repositorio que introduzca el usuario, los datos obtenidos por PyGitHub y del repositorio de GitHub a analizar. El usuario debe introducir la dirección de un repositorio, compuesta por ``usuario\textunderscore de\textunderscore GitHub/nombre\textunderscore del\textunderscore repositorio'' y PyGitHub se encarga de pedir los datos a GitHub y devolvérselos al programa principal. Vamos a ver esta parte con más detalle.
+Una vez que el usuario introduce el repositorio, el programa principal, gracias a Django, manda una petición GET\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Methods/GET}}  a través de la cual se obtiene el repositorio con la función get\textunderscore repository del paquete ``analize\textunderscore repo.py'' creado por mí. Este paquete contiene las funciones necesarias para obtener los datos del repositorio. A continuación se crean 7 listas, una por cada parámetro de OpenBRR, en el fichero views.py donde se irán guardando los datos del repositorio.
+Estos parámetros son mostrados al usuario en la página de datos, donde se podrán manipular tanto los mismos datos como sus pesos correspondientes según las necesidades del usuario. Además, el usuario podrá introducir su dirección de correo en esta página para que le llegue un mensaje con los resultados del análisis. Finalmente, se llega a la página de calificación final donde se podrán observar los resultados del análisis.
 \begin{figure}
     \centering
     \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/programaprincipal.jpg}
-    \caption{Arquitectura de la apliación}\label{fig:arquitectura principal}
+    \caption{Arquitectura de la aplicación}\label{fig:arquitectura principal}
 \end{figure}
-\subsection{Fichero views.py}
-\label{sec:views.py}
-Este fichero forma parte de la estructura de Django y tiene dos funciones principales: recibir las peticiones GET y, en función de dichas peticiones, servir la plantilla HTML correspondiente y organizar los datos extraídos del repositorio a analizar. Funciona de la siguiente manera:
-\begin{enumerate}
-	\item El usuario manda mediante una petición GET el nombre del repositorio, el fichero views.py lo recibe y le pide a PyGitHub los datos del repositorio para mostrar al usuario la plantilla ``repo\textunderscore data.html'' donde podrá leer los datos y manipularlos para su posterior calificación. En caso de que no exista el repositorio escrito por el usuario se devolverá la plantilla ``error.html'' donde se le da la posibilidad de volver a la página principal para volver a escribir el nombre correctamente.
-	\item Una vez extraídos los datos del repositorio, views.py los organiza y guarda en 7 listas correspondientes a los parámetros de OpenBRR(posts, post\textunderscore sec, post\textunderscore func, post\textunderscore supp, post\textunderscore qual, post\textunderscore usab y post\textunderscore adop correspondientes a los parámetros de comunidad, seguridad, funcionalidad, soporte, calidad, usabilidad y adopción respectivamente). Consigue analizar estos datos gracias a las diferentes funciones de PyGitHub.
-	\item Como se verá más adelante, en esta plantilla el usuario podrá manejar los datos a su antojo y, una vez esté de acuerdo, mandarlos para su calificación junto con su dirección de correo para recibir el análisis en su bandeja de entrada si así lo desea.
-	\item Mediante otra petición GET se mandan todos estos datos y se calculan las calificaciones.
-	\item Views.py puntúa el repositorio en función de los datos obtenidos y/o introducidos por el usuario y el valor que les haya querido dar con la siguiente fórmula: \begin{verbatim}
-	nota ponderada = nota * valor
-	\end{verbatim}
-	siendo la nota la calificación del 1 al 10 del dato en cuestión y valor el número que haya introducido el usuario en ese apartado dividido por 100. En apartados posteriores se explica cómo se obtiene cada nota más en profundidad.
-	\item Como el estándar de OpenBRR da una calificación del 1 al 5, la nota final de cada parámetro se divide entre 2 con un redondeo de 2 decimales. Se aplica la siguiente fórmula:
-	\begin{verbatim}
-	nota final parámetro = suma notas ponderadas / 2
-	\end{verbatim}
-	\item La nota final del repositorio se obtiene como la media de las notas de los 7 parámetros:
-	\begin{verbatim}
-	nota final = suma de las notas de los parámetros / 7
-	\end{verbatim}
-	\item Finalmente, views.py sirve la plantilla ``result.html'' y manda un correo al usuario (si así lo ha indicado) con los resultados del análisis y las calificaciones sobre 5.
-\end{enumerate}
-\subsubsection{Envío del correo}
-Para el envío del correo se utiliza la función ``send\textunderscore mail'' de django.core.mail la cual nos permite enviar correos definiendo el asunto, el mensaje y la dirección de correo desde la que se enviará. Se debe configurar previamente el fichero ``settings.py'' de Django añadiendo los siguientes campos:
+
+\subsection{Envío del correo}
+Para el envío del correo se utiliza la función ``send\textunderscore mail'' de django.core.mail que nos permite enviar correos definiendo el asunto, el mensaje y la dirección de correo desde la que se enviará. Se debe configurar previamente el fichero ``settings.py'' de Django añadiendo los siguientes campos:
 \begin{verbatim}
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
@@ -530,14 +510,20 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "tu_direccion_de_correo@gmail.com"
 EMAIL_HOST_PASSWORD = config["EMAIL_PASSWORD"]
 \end{verbatim}
-``EMAIL\textunderscore PASSWORD'' es la contraseña generada por Gmail\footnote{\url{https://www.gmail.com/mail/help/intl/es/about.html?iframe}} para estos tipos de servicios y que va guardada en un fichero ``credentials.env'' para no ser desvelada en el repositorio. Para generar esta contraseña debes entrar en el apartado de seguridad de tu cuenta de Google\footnote{\url{https://myaccount.google.com/security}} pulsando en el apartado ``Contraseñas para aplicaciones'' tal y como se indica en la figura ~\ref{fig:contraseña gmail}.
+``EMAIL\textunderscore PASSWORD'' es la contraseña generada por Gmail\footnote{\url{https://www.gmail.com/mail/help/intl/es/about.html?iframe}} para estos tipos de servicios y que va guardada en un fichero ``credentials.env'' para no ser desvelada en el repositorio. Para generar esta contraseña debes entrar en el apartado de seguridad de tu cuenta de Google\footnote{\url{https://myaccount.google.com/security}} pulsando en el apartado ``Contraseñas para aplicaciones'', tal y como se indica en la figura ~\ref{fig:contraseña gmail}.
 \begin{figure}
     \centering
     \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/contraseña_gmail.png}
     \caption{Apartado para generar la contraseña de Gmail}\label{fig:contraseña gmail}
 \end{figure}
 \subsection{PyGitHub}
-PyGitHub es la biblioteca encargada de recibir la dirección del repositorio y obtener los datos necesarios para su posterior análisis. Funciona de la siguiente manera:
+PyGitHub es la biblioteca encargada de recibir la dirección del repositorio y obtener los datos necesarios para su posterior análisis. Funciona de la siguiente manera (ver figura~\ref{fig:diagrama pygithub}):
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth, keepaspectratio]{img/diagrama_pygithub.png}
+    \caption{Diagrama de funcionalidad de PyGitHub}\label{fig:diagrama pygithub}
+\end{figure}
 \begin{enumerate}
 	\item En primer lugar obtiene el repositorio con la función ``get\textunderscore repo()'' a la que se le pasa como argumento la dirección del repositorio.
 	\item Una vez hecho esto se obtiene un objeto repositorio como el de la figura~\ref{fig:Objeto repositorio de PyGitHub} donde se ha puesto de ejemplo el repositorio ``moodle/moodle''\footnote{\url{https://github.com/moodle/moodle}}
@@ -552,10 +538,10 @@ github.GitHubException.RateLimitExceededException: 403
   for more details.)", "documentation_url": 
   "https://docs.github.com/rest/overview/
   resources-in-the-rest-api#rate-limiting"} 
-\end{verbatim} lo cual ha sido controlado en el fichero views.py visto anteriormente haciendo que muestre la plantilla ``overflow.html'' que se corresponde con una página que informa al usuario del error y le permite volver a la página principal como se observa en la figura~\ref{fig:error overflow}.
+\end{verbatim} lo cual ha sido controlado en el fichero views.py haciendo que muestre la plantilla ``overflow.html'', que se corresponde con una página que informa al usuario del error y le permite volver a la página principal como se observa en la figura~\ref{fig:error overflow} donde vemos la página de error con el botón que permite volver a la página principal.
 \begin{figure}
     \centering
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/objeto_repositorio.png}
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/objeto_repositorio.png}
     \caption{Objeto repositorio de PyGitHub}\label{fig:Objeto repositorio de PyGitHub}
 \end{figure}
 \begin{figure}
@@ -564,7 +550,7 @@ github.GitHubException.RateLimitExceededException: 403
     \caption{Overflow.html}\label{fig:error overflow}
 \end{figure}
 \subsection{Django}
-Django es el framework de Python que se encarga de gestionar la página web mediante el envío de formularios. Consta de varios ficheros, entre ellos el fichero views.py explicado en el apartado~\ref{sec:views.py}.
+Django es el framework de Python que se encarga de gestionar la página web mediante el envío de formularios. Consta de varios ficheros, entre ellos el fichero views.py que es el más importante.
 Los formularios son enviados mediante el método GET como en el siguiente ejemplo:
 \begin{verbatim}
 text=ivanmiguelmolinero%2FTFG
@@ -576,8 +562,46 @@ Se usan parejas de clave-valor, donde la clave es el nombre del campo a rellenar
     \caption{Página principal con el formulario relleno}\label{fig:ivanmiguelmolinero/TFG}
 \end{figure}
 A continuación se pasan a explicar cada uno de los ficheros de importancia de Django.
+
+\subsubsection{Fichero views.py}
+\label{sec:views.py}
+Este fichero forma parte de la estructura de Django y tiene dos funciones principales: recibir las peticiones GET y, en función de dichas peticiones, servir la plantilla HTML correspondiente y organizar los datos extraídos del repositorio a analizar. Funciona de la siguiente manera:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/diagrama_views.png}
+    \caption{Diagrama de la función principal de views.py}\label{fig:diagrama views.py}
+\end{figure}
+\begin{enumerate}
+	\item El usuario manda mediante una petición GET el nombre del repositorio, el fichero views.py lo recibe y le pide a PyGitHub los datos del repositorio para mostrar al usuario la plantilla ``repo\textunderscore data.html'' donde podrá leer los datos y manipularlos para su posterior calificación. En caso de que no exista el repositorio escrito por el usuario se devolverá la plantilla ``error.html'' donde se le da la posibilidad de volver a la página principal para volver a escribir el nombre correctamente. Todo esto se puede observar en la figura~\ref{fig:diagrama views.py}
+	\item Una vez extraídos los datos del repositorio, views.py los organiza y guarda en 7 listas correspondientes a los parámetros de OpenBRR (posts, post\textunderscore sec, post\textunderscore func, post\textunderscore supp, post\textunderscore qual, post\textunderscore usab y post\textunderscore adop correspondientes a los parámetros de comunidad, seguridad, funcionalidad, soporte, calidad, usabilidad y adopción respectivamente). Consigue analizar estos datos gracias a las diferentes funciones de PyGitHub.
+	\item Como se verá más adelante, en esta plantilla el usuario podrá manejar los datos a su antojo y, una vez esté de acuerdo, mandarlos para su calificación junto con su dirección de correo para recibir el análisis en su bandeja de entrada si así lo desea.
+	\item Mediante otra petición GET se mandan todos estos datos y se calculan las calificaciones.
+	\item Views.py puntúa el repositorio en función de los datos obtenidos y/o introducidos por el usuario y el valor que les haya querido dar con la siguiente fórmula: \begin{verbatim}
+	nota ponderada = nota * valor
+	\end{verbatim}
+	siendo la nota la calificación del 1 al 10 del dato en cuestión y valor el número que haya introducido el usuario en ese apartado dividido por 100. En apartados posteriores se explica cómo se obtiene cada nota más en profundidad.
+	\item Como el procedimiento de OpenBRR da una calificación del 1 al 5, la nota final de cada parámetro se divide entre 2 con un redondeo de 2 decimales. Se aplica la siguiente fórmula:
+	\begin{verbatim}
+	nota final parámetro = suma notas ponderadas / 2
+	\end{verbatim}
+	\item La nota final del repositorio se obtiene como la media de las notas de los 7 parámetros:
+	\begin{verbatim}
+	nota final = suma de las notas de los parámetros / 7
+	\end{verbatim}
+	\item Finalmente, views.py sirve la plantilla ``result.html'' y manda un correo al usuario (si así lo ha indicado) con los resultados del análisis y las calificaciones sobre 5.
+\end{enumerate}
+
 \subsubsection{urls.py}
-Es el fichero encargado de gestionar las peticiones que le llegan comunicándose con views.py. El usuario lanza una petición y, en función de esta, este fichero activa una función u otra de views.py. Por ejemplo, si el usuario introduce la dirección raíz, urls.py se encarga de que se acabe mostrando la página principal mediante la función views.post\textunderscore main. Las otras dos URLS que debe gestionar se corresponden con el envío del formulario de la página principal (figura~\ref{fig:ivanmiguelmolinero/TFG}) y el envío del formulario de repo\textunderscore data.html
+Es el fichero encargado de gestionar las peticiones que le llegan comunicándose con views.py. El usuario lanza una petición y, en función de esta, este fichero activa una función u otra de views.py. Por ejemplo, si el usuario introduce la dirección raíz, urls.py se encarga de que se acabe mostrando la página principal mediante la función views.post\textunderscore main. Las otras dos URLS que debe gestionar se corresponden con el envío del formulario de la página principal (figura~\ref{fig:ivanmiguelmolinero/TFG}) y el envío del formulario de repo\textunderscore data.html. Las peticiones y la función que inician se recogen en la siguiente tabla:
+
+\begin{tabular}{| c | c |}
+\hline
+Petición & Función (plantilla HTML)\\ \hline
+/ & views.post\textunderscore main (main.html) \\ \hline
+post & views.post\textunderscore repo (repo\textunderscore data.html) \\ \hline
+get-data & views.get\textunderscore data (result.html) \\ \hline
+\end{tabular}
 \subsubsection{forms.py}
 Fichero que define el modelo de formulario a utilizar
 \subsubsection{models.py}
