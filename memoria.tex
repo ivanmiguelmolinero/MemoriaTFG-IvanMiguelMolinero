@@ -30,6 +30,7 @@
 \usepackage{float}  %% H para posicionar figuras
 \usepackage[nottoc, notlot, notlof, notindex]{tocbibind} %% Opciones de índice
 \usepackage{latexsym}  %% Logo LaTeX
+\usepackage{array}
 
 \title{Memoria del Proyecto}
 \author{Iván Miguel Molinero}
@@ -592,6 +593,119 @@ Este fichero forma parte de la estructura de Django y tiene dos funciones princi
 	\item Finalmente, views.py sirve la plantilla ``result.html'' y manda un correo al usuario (si así lo ha indicado) con los resultados del análisis y las calificaciones sobre 5.
 \end{enumerate}
 
+Este fichero es muy importante para el correcto funcionamiento de la aplicación, por ello es de vital importancia asegurarse de que funciona perfectamente. Debido a su extensión, se explicarán las pruebas que se hicieron poniendo de ejemplo la pestaña comunidad de la figura~\ref{fig:comunidad_pygithub} y se darán por explicadas todas las demás ya que, además, su funcionamiento es exactamente el mismo.
+Views.py se encarga, entre otras muchas cosas, de recoger los datos enviados por el usuario en el formulario y obtener la calificación de cada apartado y la calificación final del repositorio. Para la pestaña comunidad, como no se han modificado los valores de la aportación de cada dato, se obtiene su calificación final sobre 5 con la siguiente fórmula:
+\begin{verbatim}
+nota final = (nota commits * 0.2 + nota forks * 0.2
++ nota suscriptores * 0.2 + nota organización * 0.2 
++ nota actualización * 0.2)/2
+\end{verbatim}
+
+Views.py también se encarga del cálculo de las calificaciones. Para el cálculo de la calificación de cada dato en concreto se usan los métodos que podemos ver de la figura~\ref{fig:nota_commits} a la figura~\ref{fig:nota_actualización} en función del número introducido por el usuario en el formulario de la figura~\ref{fig:comunidad_pygithub}. Cabe destacar que, en caso de tratarse de un formulario de ``sí o no'' la nota es binaria, es decir, un 10 si cumple el requisito o un 0 si no lo cumple. Esto lo podemos ver en la figura~\ref{fig:nota_organización}.
+Si obtenemos la nota final a mano obtenemos que la nota de cada apartado es:
+\begin{verbatim}
+nota commits = 10
+nota forks = 10
+nota suscriptores = 10
+nota organización = 10
+nota actualización = 7.5
+\end{verbatim}
+Por tanto, aplicando la fórmula anterior obtenemos una calificación de 4.75 que es lo mismo que ha calculado la aplicación como vemos en la figura~\ref{fig:test_comunidad} así que funciona correctamente. Por último, comprobamos que obtiene de manera correcta la nota media de todos los apartados. A mano, calculamos la nota final sumando las notas de cada apartado, que podemos observar de la figura~\ref{fig:test_comunidad} a la figura~\ref{fig:test_adopción_y_notafinal} y dividiendo entre 7 para obtener una nota final de:
+\begin{verbatim}
+nota final = (4.75 + 4.38 + 2.06 + 2.5 + 0 + 5 + 5)/ 7 = 3.38
+\end{verbatim}
+Como vemos en esta última figura, la aplicación ha calculado la nota correctamente y podemos concluir que funciona.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_commits.png}
+    \caption{Obtención de la calificación en función del número de commits.}\label{fig:nota_commits}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_forks.png}
+    \caption{Obtención de la calificación en función del número de forks.}\label{fig:nota_forks}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_suscriptores.png}
+    \caption{Obtención de la calificación en función del número de suscriptores.}\label{fig:nota_suscriptores}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_organización.png}
+    \caption{Obtención de la calificación en función de si pertenece a una organización.}\label{fig:nota_organización}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_actualización.png}
+    \caption{Obtención de la calificación en función de la fecha de última actualización.}\label{fig:nota_actualización}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_comunidad.png}
+    \caption{Pestaña de comunidad de PyGitHub.}\label{fig:comunidad_pygithub}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_comunidad.png}
+    \caption{Calificación de comunidad obtenida por la aplicación.}\label{fig:test_comunidad}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_seguridad.png}
+    \caption{Calificación de seguridad obtenida por la aplicación.}\label{fig:test_seguridad}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_funcionalidad.png}
+    \caption{Calificación de funcionalidad obtenida por la aplicación.}\label{fig:test_funcionalidad}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_soporte.png}
+    \caption{Calificación de soporte obtenida por la aplicación.}\label{fig:test_soporte}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_calidad.png}
+    \caption{Calificación de calidad obtenida por la aplicación.}\label{fig:test_calidad}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_usabilidad.png}
+    \caption{Calificación de usabilidad obtenida por la aplicación.}\label{fig:test_usabilidad}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_adopción_y_notafinal.png}
+    \caption{Calificación de adopción y nota final obtenida por la aplicación.}\label{fig:test_adopción_y_notafinal}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/principal_main.png}
+    \caption{Página principal antes de analizar PyGitHub.}\label{fig:pricipal_pygithub}
+\end{figure}
+
+
+\subsubsection{Envío del correo}
+Finalmente, el fichero views.py envía al usuario un mensaje a su dirección de correo que ha indicado con los mismos datos que podemos observar de la la figura~\ref{fig:test_comunidad} a la figura~\ref{fig:test_adopción_y_notafinal} por si quiere guardar ese análisis. Para comprobar su correcto funcionamiento indico mi dirección de correo en el formulario de la figura~\ref{fig:envio_correo}. Como podemos observar en la figura~\ref{fig:correo} los datos coinciden. El envío del correo es un éxito.
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth, keepaspectratio]{img/envio_correo.png}
+    \caption{Formulario rellenado con mi propia dirección de correo.}\label{fig:envio_correo}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[ keepaspectratio]{img/correo.png}
+    \caption{Mensaje enviado por la aplicación.}\label{fig:correo}
+\end{figure}
+
+
+
 \subsubsection{urls.py}
 Es el fichero encargado de gestionar las peticiones que le llegan comunicándose con views.py. El usuario lanza una petición y, en función de esta, este fichero activa una función u otra de views.py. Por ejemplo, si el usuario introduce la dirección raíz, urls.py se encarga de que se acabe mostrando la página principal mediante la función views.post\textunderscore main. Las otras dos URLS que debe gestionar se corresponden con el envío del formulario de la página principal (figura~\ref{fig:ivanmiguelmolinero/TFG}) y el envío del formulario de repo\textunderscore data.html. Las peticiones y la función que inician se recogen en la siguiente tabla:
 
@@ -603,9 +717,10 @@ post & views.post\textunderscore repo (repo\textunderscore data.html) \\ \hline
 get-data & views.get\textunderscore data (result.html) \\ \hline
 \end{tabular}
 \subsubsection{forms.py}
-Fichero que define el modelo de formulario a utilizar
+Fichero que define el modelo de formulario a utilizar, el cual es simplemente un par clave-valor, donde la clave es el nombre del campo a rellenar y el valor es lo que introduzca el usuario.
 \subsubsection{models.py}
-Fichero que da forma al modelo definido en forms.py
+Fichero que da forma al modelo definido en forms.py.
+Contiene la función ``\textunderscore \textunderscore str \textunderscore \textunderscore '' que permite devolver el valor introducido por el usuario.
 \subsubsection{settings.py}
 Este es el fichero de configuración de Django, en él se deben especificar:
 \begin{itemize}
@@ -622,17 +737,52 @@ Este es el fichero de configuración de Django, en él se deben especificar:
 	\item La URL y el directorio raíz.
 	\item Los valores necesarios para el envío del correo: EMAIL\textunderscore BACKEND, EMAIL\textunderscore HOST, EMAIL\textunderscore USE\textunderscore TLS, EMAIL\textunderscore PORT, EMAIL\textunderscore HOST\textunderscore USER y EMAIL\textunderscore HOST\textunderscore PASSWORD.
 \end{itemize}
+
+\begin{center}
+
+\begin{tabular}{ | m{7cm} | m{9cm} | }
+\hline
+Campo & Valor\\ \hline
+Directorio credentials.env & mysite\textbackslash{}credentials.env \\ \hline
+Directorio base & Path(\textunderscore \textunderscore file\textunderscore \textunderscore).resolve().parent.parent \\ \hline
+Clave secreta & Clave secreta de Django \\ \hline
+Hosts & 127.0.0.0 y pythonanywhere.com \\ \hline
+Apps instaladas & Apps necesarias para el funcionamiento de Django y OpenBRR \\ \hline
+Idioma del lenguaje & es-es \\ \hline
+URL y directorio raíz & /static/ \\ \hline
+Valores para el envío del correo  & EMAIL\textunderscore BACKEND, EMAIL\textunderscore HOST, EMAIL\textunderscore USE\textunderscore TLS, EMAIL\textunderscore PORT, EMAIL\textunderscore HOST\textunderscore USER y EMAIL\textunderscore HOST\textunderscore PASSWORD \\ \hline
+\end{tabular}
+
+\end{center}
+
 \subsubsection{manage.py}
 Es el fichero encargado de iniciar el servidor como se indica en el manual de usuario y gestionar el error de no haber instalado correctamente Django. Función mediante el siguiente comando:
 \begin{verbatim}
 	python manage.py runserver
 \end{verbatim}
 \subsection{Javascript}
-Los ficheros javascript son los encargados de la interacción aplicación-usuario. En el caso de esta aplicación, la plantilla repo\textunderscore data.html funciona gracias al fichero datos.js
+Los ficheros javascript son los encargados de la interacción aplicación-usuario. En el caso de esta aplicación, la plantilla repo\textunderscore data.html funciona gracias al fichero datos.js.
 \subsubsection{datos.js}
 Controla que el usuario pueda ocultar y mostrar las pestañas de los parámetros de OpenBRR, controla que no pueda introducir valores superiores al 100\% (función edit\textunderscore max\textunderscore value\textunderscore [parámetro] y get\textunderscore suma) y que pueda modificar los datos mostrados (función save\textunderscore input\textunderscore [parámetro]). Además, controla que solo pueda enviar el formulario si se están mostrando para evitar el error de enviar el formulario vacío.
 \subsection{Plantillas HTML}
-Es lo que se muestra al usuario una vez renderizadas. La aplicación cuenta con las siguientes:
+Una plantilla HTML lo que se muestra al usuario una vez renderizadas.
+
+Como se ve en la figura~\ref{fig:Plantilla1}, correspondiente con repo\textunderscore data.html, la plantilla se estructura sobre varios bucles ``for'' que van recorriendo los pares clave-valor, enviados mediante un GET, y van colocando los datos en la plantilla. En la figura~\ref{fig:Plantilla2} vemos la estructura de result.html, la cual se basa en un ``with'' que recoge los valores y los escribe en la plantilla de forma similar al ``for'' anterior.
+
+La aplicación cuenta con las siguientes:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.15\textwidth, keepaspectratio]{img/plantilla_repo_data.png}
+    \caption{Plantilla repo\textunderscore data.html}\label{fig:Plantilla1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.15\textwidth, keepaspectratio]{img/plantilla_result.png}
+    \caption{Plantilla result.html}\label{fig:Plantilla1}
+\end{figure}
+
 \begin{itemize}
 	\item \textbf{Main.html:} Correspondiente a la página principal muestra el nombre de la aplicación y el formulario para enviar el nombre del repositorio a analizar.
 	\item \textbf{Repo\textunderscore data.html:} Muestra los datos del repositorio en diferentes pestañas que el usuario puede mostrar u ocultar. También puede modificar esos datos. Al final hay un formulario para introducir su dirección de correo donde recibirá los resultados de su análisis.
@@ -641,44 +791,8 @@ Es lo que se muestra al usuario una vez renderizadas. La aplicación cuenta con 
 	\item \textbf{Overflow.html:} Página que se muestra cuando se excede el número de peticiones a GitHub. Permite al usuario volver a la página principal.
 \end{itemize}
 \subsection{Ficheros CSS}
-Son los que dan estilo a cada una de las plantillas HTML.
-\subsection{Ejemplo de uso}
-De la figura~\ref{fig:ivanmiguelmolinero/TFG} a la figura~\ref{fig:resultados_3} tenemos un ejemplo analizando el repositorio de este TFG.
-\begin{figure}
-    
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_off.png}
-    \caption{Página de datos con las pestañas ocultas.}\label{fig:pestañas_off}
-\end{figure}
-\begin{figure}
-    
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_1.png}
-    \caption{Primera parte de la página de datos.}\label{fig:pestañas_1}
-\end{figure}
-\begin{figure}
-    
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_2.png}
-    \caption{Segunda parte de la página de datos.}\label{fig:pestañas_2}
-\end{figure}
-\begin{figure}
-    
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_3.png}
-    \caption{Tercera parte de la página de datos.}\label{fig:pestañas_3}
-\end{figure}
-\begin{figure}
-    
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/resultados_1.png}
-    \caption{Primera parte de la página de resultados.}\label{fig:resultados_1}
-\end{figure}
-\begin{figure}
-    
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/resultados_2.png}
-    \caption{Segunda parte de la página de resultados.}\label{fig:resultados_2}
-\end{figure}
-\begin{figure}
-    
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/resultados_3.png}
-    \caption{Tercera parte de la página de resultados.}\label{fig:resultados_3}
-\end{figure}
+Son los que dan estilo a cada una de las plantillas HTML. En ellos, se especifica cada bloque de HTML y se define el estilo que va a tener. En el caso de este proyecto, se ha elegido unos tonos azules y negros para todas las páginas con el fin de mantener una uniformidad.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % EXPERIMENTOS Y VALIDACIÓN %
@@ -734,110 +848,61 @@ Por los motivos explicados anteriormente se descartó Perceval y se reemplazó p
 \end{figure}
 \section{Pruebas con la aplicación}
 Una vez comprobado el correcto funcionamiento de PyGitHub, se implementa en la aplicación junto con Django. Para corroborar que las peticiones se envían y el repositorio se analiza correctamente, rellenamos el formulario inicial con el repositorio de PyGitHub (como en el apartado anterior) para ver si los datos obtenidos coinciden. La página principal queda tal y como observamos en la figura~\ref{fig:pricipal_pygithub}. Finalmente, en la ventana de datos que podemos ver en la figura~\ref{fig:comunidad_pygithub} observamos que los datos obtenidos coinciden con los obtenidos en la figura~\ref{fig:pygithub_salida} y que, por tanto, la implementación ha sido un éxito.
-\subsection{Pruebas con views.py}
-Como se ha explicado en el apartado~\ref{sec:views.py} este fichero es muy importante para el correcto funcionamiento de la aplicación, por ello es de vital importancia asegurarse de que funciona perfectamente. Debido a su extensión, se explicarán las pruebas que se hicieron poniendo de ejemplo la pestaña comunidad de la figura~\ref{fig:comunidad_pygithub} y se darán por explicadas todas las demás ya que, además, su funcionamiento es exactamente el mismo.
-Views.py se encarga, entre otras muchas cosas, de recoger los datos enviados por el usuario en el formulario y obtener la calificación de cada apartado y la calificación final del repositorio. Para la pestaña comunidad, como no se han modificado los valores de la aportación de cada dato, se obtiene su calificación final sobre 5 con la siguiente fórmula:
-\begin{verbatim}
-nota final = (nota commits * 0.2 + nota forks * 0.2
-+ nota suscriptores * 0.2 + nota organización * 0.2 
-+ nota actualización * 0.2)/2
-\end{verbatim}
-Para el cálculo de la calificación de cada dato en concreto se usan los métodos que podemos ver de la figura~\ref{fig:nota_commits} a la figura~\ref{fig:nota_actualización} en función del número introducido por el usuario en el formulario de la figura~\ref{fig:comunidad_pygithub}. Cabe destacar que, en caso de tratarse de un formulario de ``sí o no'' la nota es binaria, es decir, un 10 si cumple el requisito o un 0 si no lo cumple. Esto lo podemos ver en la figura~\ref{fig:nota_organización}.
-Si obtenemos la nota final a mano obtenemos que la nota de cada apartado es:
-\begin{verbatim}
-nota commits = 10
-nota forks = 10
-nota suscriptores = 10
-nota organización = 10
-nota actualización = 7.5
-\end{verbatim}
-Por tanto, aplicando la fórmula anterior obtenemos una calificación de 4.75 que es lo mismo que ha calculado la aplicación como vemos en la figura~\ref{fig:test_comunidad} así que funciona correctamente. Por último, comprobamos que obtiene de manera correcta la nota media de todos los apartados. A mano, calculamos la nota final sumando las notas de cada apartado, que podemos observar de la figura~\ref{fig:test_comunidad} a la figura~\ref{fig:test_adopción_y_notafinal} y dividiendo entre 7 para obtener una nota final de:
-\begin{verbatim}
-nota final = (4.75 + 4.38 + 2.06 + 2.5 + 0 + 5 + 5)/ 7 = 3.38
-\end{verbatim}
-Como vemos en esta última figura, la aplicación ha calculado la nota correctamente y podemos concluir que funciona.
+
+
+
+\subsection{Ejemplo de uso}
+De la figura~\ref{fig:ivanmiguelmolinero/TFG_2} a la figura~\ref{fig:resultados_3} tenemos un ejemplo analizando el repositorio de este TFG. El funcionamiento de la aplicación es el siguiente:
+
+\begin{enumerate}
+	\item En la primera ventana el usuario introduce el repositorio que quiere analizar.
+	\item Posteriormente, la aplicación obtiene los datos de ese repositorio y se los muestra por si desea manipularlos o dar más importancia a algún parámetro. Todo esto funciona con formularios.
+	\item Al final de esta ventana se le da la opción de introducir su dirección de correo por si quisiera que le llegaran los resultados por dicha vía.
+	\item Una vez enviados los datos, se califican con OpenBRR dividiéndolos en 7 parámetros y dando una calificación final sobre 5 que se muestra en la última ventana.
+\end{enumerate}
+
 \begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/principal_main.png}
-    \caption{Página principal antes de analizar PyGitHub.}\label{fig:pricipal_pygithub}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/maintfg.png}
+    \caption{Página principal con el formulario relleno}\label{fig:ivanmiguelmolinero/TFG_2}
+\end{figure}
+
+\begin{figure}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_off.png}
+    \caption{Página de datos con las pestañas ocultas.}\label{fig:pestañas_off}
 \end{figure}
 \begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/pygithub_comunidad.png}
-    \caption{Pestaña de comunidad de PyGitHub.}\label{fig:comunidad_pygithub}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_1.png}
+    \caption{Primera parte de la página de datos.}\label{fig:pestañas_1}
 \end{figure}
 \begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_commits.png}
-    \caption{Obtención de la calificación en función del número de commits.}\label{fig:nota_commits}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_2.png}
+    \caption{Segunda parte de la página de datos.}\label{fig:pestañas_2}
 \end{figure}
 \begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_forks.png}
-    \caption{Obtención de la calificación en función del número de forks.}\label{fig:nota_forks}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/pestañas_3.png}
+    \caption{Tercera parte de la página de datos.}\label{fig:pestañas_3}
 \end{figure}
 \begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_suscriptores.png}
-    \caption{Obtención de la calificación en función del número de suscriptores.}\label{fig:nota_suscriptores}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/resultados_1.png}
+    \caption{Primera parte de la página de resultados.}\label{fig:resultados_1}
 \end{figure}
 \begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_organización.png}
-    \caption{Obtención de la calificación en función de si pertenece a una organización.}\label{fig:nota_organización}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/resultados_2.png}
+    \caption{Segunda parte de la página de resultados.}\label{fig:resultados_2}
 \end{figure}
 \begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/nota_actualización.png}
-    \caption{Obtención de la calificación en función de la fecha de última actualización.}\label{fig:nota_actualización}
+    
+    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/resultados_3.png}
+    \caption{Tercera parte de la página de resultados.}\label{fig:resultados_3}
 \end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_comunidad.png}
-    \caption{Calificación de comunidad obtenida por la aplicación.}\label{fig:test_comunidad}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_seguridad.png}
-    \caption{Calificación de seguridad obtenida por la aplicación.}\label{fig:test_seguridad}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_funcionalidad.png}
-    \caption{Calificación de funcionalidad obtenida por la aplicación.}\label{fig:test_funcionalidad}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_soporte.png}
-    \caption{Calificación de soporte obtenida por la aplicación.}\label{fig:test_soporte}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_calidad.png}
-    \caption{Calificación de calidad obtenida por la aplicación.}\label{fig:test_calidad}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_usabilidad.png}
-    \caption{Calificación de usabilidad obtenida por la aplicación.}\label{fig:test_usabilidad}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/test_adopción_y_notafinal.png}
-    \caption{Calificación de adopción y nota final obtenida por la aplicación.}\label{fig:test_adopción_y_notafinal}
-\end{figure}
-\subsubsection{Envío del correo}
-Finalmente, el fichero views.py envía al usuario un mensaje a su dirección de correo que ha indicado con los mismos datos que podemos observar de la la figura~\ref{fig:test_comunidad} a la figura~\ref{fig:test_adopción_y_notafinal} por si quiere guardar ese análisis. Para comprobar su correcto funcionamiento indico mi dirección de correo en el formulario de la figura~\ref{fig:envio_correo}. Como podemos observar en la figura~\ref{fig:correo} los datos coinciden. El envío del correo es un éxito.
-\begin{figure}
-    \centering
-    \includegraphics[width=1\textwidth, keepaspectratio]{img/envio_correo.png}
-    \caption{Formulario rellenado con mi propia dirección de correo.}\label{fig:envio_correo}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[ keepaspectratio]{img/correo.png}
-    \caption{Mensaje enviado por la aplicación.}\label{fig:correo}
-\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RESULTADOS %
