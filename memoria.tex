@@ -780,7 +780,7 @@ La aplicación cuenta con las siguientes:
 \begin{figure}
     \centering
     \includegraphics[width=1.15\textwidth, keepaspectratio]{img/plantilla_result.png}
-    \caption{Plantilla result.html}\label{fig:Plantilla1}
+    \caption{Plantilla result.html}\label{fig:Plantilla2}
 \end{figure}
 
 \begin{itemize}
@@ -910,8 +910,8 @@ De la figura~\ref{fig:ivanmiguelmolinero/TFG_2} a la figura~\ref{fig:resultados_
 \cleardoublepage
 \chapter{Resultados}
 \label{chap:resultados}
-Una vez hechas las pruebas explicadas en el capítulo~\ref{chap:experimentos} se pasa a comprobar que la aplicación devuelve resultados coherentes, es decir, que a repositorios teóricamente buenos les da una buena calificación y a repositorios prácticamente vacíos (como el de la prueba que se mostrará en el apartado~\ref{sec:vacio}) les da una mala calificación.
-\section{Prueba con myTeachingURJC/Arq-computadores-01}
+Una vez hechas las pruebas explicadas en el capítulo~\ref{chap:experimentos} se pasa a observar los resultados con diferentes repositorios, es decir, que a repositorios teóricamente buenos les da una buena calificación y a repositorios prácticamente vacíos (como el de la prueba que se mostrará en el apartado~\ref{sec:vacio}) les da una mala calificación.
+\section{Resultados con myTeachingURJC/Arq-computadores-01}
 Este repositorio\footnote{\url{https://github.com/myTeachingURJC/Arq-computadores-01}}  es el de la asignatura ``Arquitectura de computadores'' de la URJC. A primera vista, como vemos en la figura~\ref{fig:myteachingURJC}, se podría decir que se trata de un buen repositorio. Vamos a analizarlo.
 \begin{figure}
     \centering
@@ -935,7 +935,7 @@ De la figura~\ref{fig:myteachingURJC_1} a la figura ~\ref{fig:myteachingURJC_3} 
     \includegraphics[ width=1.1\textwidth, keepaspectratio]{img/myteachingURJC_3.png}
     \caption{Datos del repositorio de ``Arquitectura de computadores''.}\label{fig:myteachingURJC_3}
 \end{figure}
-\subsection{Resultados de myTeachingURJC/Arq-computadores-01}
+\subsection{Conclusiones de myTeachingURJC/Arq-computadores-01}
 A continuación, se ven los resultados del análisis del repositorio. Véase de la figura~\ref{fig:myteachingURJC_4} a la figura~\ref{fig:myteachingURJC_6}. Obtenemos una calificación final de 3.13 sobre 5, lo que es una calificación coherente con este repositorio.
 \begin{figure}
     \centering
@@ -952,7 +952,7 @@ A continuación, se ven los resultados del análisis del repositorio. Véase de 
     \includegraphics[ width=1.1\textwidth, keepaspectratio]{img/myteachingURJC_6.png}
     \caption{Resultados del repositorio de ``Arquitectura de computadores''.}\label{fig:myteachingURJC_6}
 \end{figure}
-\section{Prueba con moodle/moodle}
+\section{Resultados con moodle/moodle}
 Ahora, vamos a probar con un repositorio teóricamente completo como es el de Moodle\footnote{\url{https://github.com/moodle/moodle}} que tenemos en la figura~\ref{fig:moodle}. Moodle~\cite{website:Moodle}  es un sistema de gestión de aprendizaje, gratuito y de código abierto que utilizan muchos centros educativos. Por ejemplo, la URJC lo usa para la gestión de su Aula Virtual\footnote{\url{https://www.aulavirtual.urjc.es/moodle/login/index.php}} 
 \begin{figure}
     \centering
@@ -976,7 +976,7 @@ Como siempre, en primer lugar obtenemos los datos del repositorio que mandaremos
     \includegraphics[ width=1.1\textwidth, keepaspectratio]{img/moodle_3.png}
     \caption{Datos del repositorio de Moodle.}\label{fig:moodle_3}
 \end{figure}
-\subsection{Resultados de moodle/moodle}
+\subsection{Conclusiones de moodle/moodle}
 Finalmente, vemos los resultados del análisis del repositorio de Moodle. Véase de la figura~\ref{fig:moodle_4} a la figura~\ref{fig:moodle_6}. Obtenemos una calificación final de 3.09 sobre 5, lo que nos vuelve a indicar que es un buen repositorio, es decir, es de fiar.
 \begin{figure}
     \centering
@@ -993,7 +993,7 @@ Finalmente, vemos los resultados del análisis del repositorio de Moodle. Véase
     \includegraphics[ width=1.1\textwidth, keepaspectratio]{img/moodle_6.png}
     \caption{Resultados del repositorio de Moodle.}\label{fig:moodle_6}
 \end{figure}
-\section{Prueba con un repositorio vacío}
+\section{Resultados con un repositorio vacío}
 \label{sec:vacio}
 Finalmente, probaremos la aplicación con un repositorio que no contenga nada, únicamente el README inicial, para demostrar que mantiene la coherencia a la hora de calificar. Adicionalmente, se modificarán los datos para probar cómo cambian los resultados. El repositorio elegido para esta prueba es ``ivanmiguelmolinero/repositorio\textunderscore vacio''\footnote{\url{https://github.com/ivanmiguelmolinero/repositorio_vacio}}. Lo podemos ver en la figura~\ref{fig:vacio}.
 \begin{figure}
@@ -1018,8 +1018,8 @@ Volvemos a ver los datos recogidos del análisis de un repositorio, esta vez del
     \includegraphics[ width=1.1\textwidth, keepaspectratio]{img/vacio_3.png}
     \caption{Datos del repositorio vacío.}\label{fig:vacio_3}
 \end{figure}
-\subsection{Resultados del repositorio vacío}
-Vemos que los resultados son bastante peores en comparación con los dos casos anteriores, obteniendo una calificación final de 2.17, luego es una calificación coherente. Vemos los resultados de la figura~\ref{fig:vacio_4} a la figura~\ref{fig:vacio_6}.
+\subsection{Conclusiones del repositorio vacío}
+Vemos que los resultados son bastante peores en comparación con los dos casos anteriores, obteniendo una calificación final de 2.17, luego es una calificación coherente ya que es una puntuación bastante baja y algunos parámetros obtienen buena puntuación pese a ser un repositorio vacío. Por ejemplo, el parámetro de tamaño, que mide lo que ocupan los archivos del repositorio en kilobytes, obtiene una buena puntuación ya que el repositorio es lo más ligero que podría ser. Es por eso y porque algunos datos no dependen tanto del repositorio si no del dueño del mismo que algunas puntuaciones de la figura~\ref{fig:vacio_5} son superiores a las de otros repositorios pese a estar vacío. Vemos los resultados de la figura~\ref{fig:vacio_4} a la figura~\ref{fig:vacio_6}.
 \subsection{Modificación de los datos del repositorio vacío}
 Como se indica en el apartado~\ref{sec:vacio} vamos a pasar a modificar los datos y los valores que hemos obtenido al analizar el repositorio vacío. Esta funcionalidad ha sido añadida para que el usuario pueda dar más importancia a la análisis de según que apartados según le convenga para sus menesteres o por si quiere comprobar como cambiaría la calificación de su repositorio en caso de que cambiara cosas antes de realizar esas modificaciones.
 Se han modificado los datos de los parámetros de comunidad y seguridad (el resto se han dejado igual) como vemos en la figura~\ref{fig:vacio_7}.
@@ -1078,7 +1078,7 @@ En primer lugar se explicarán los objetivos conseguidos y a continuación la so
 \end{itemize}
 \subsection{Solución de los objetivos no conseguidos}
 \begin{itemize}
-	\item No se ha conseguido solucionar el error de PyGitHub que limita el número de peticiones que puede realizar el usuario por lo que se ha puesto una pantalla de error que informa al usuario del error y le permite volver a la página principal indicándole que debe esperar antes de volver a analizar un repositorio.
+	\item No se ha conseguido solucionar el error de PyGitHub que limita el número de peticiones que puede realizar el usuario por lo que se ha puesto una pantalla de error que informa al usuario del error y le permite volver a la página principal indicándole que debe esperar antes de volver a analizar un repositorio. El error se solucionaría introduciendo la clave secreta del repositorio a analizar, pero el objetivo de este proyecto es poder analizar repositorios ajenos en su mayoría por lo que esta solución no es viable. 
 	\item A la hora de mostrar y ocultar las pestañas en la pantalla de datos no se ha conseguido que el usuario pueda mandar los datos con las pestañas ocultas ya que la aplicación detecta que los formularios que están ocultos están vacíos por lo que se ha optado por no permitir al usuario enviar los datos con alguna pestaña oculta. Cuando lo intenta, se le muestra la alerta que vemos en la figura~\ref{fig:alerta}.
 \end{itemize}
 \begin{figure}
@@ -1091,9 +1091,9 @@ En primer lugar se explicarán los objetivos conseguidos y a continuación la so
 Para la realización de este TFG he aplicado los conocimientos adquiridos en las diferentes asignaturas de programación que hay durante el grado así como un asignatura de primero a la hora de redactar la memoria.
 \begin{enumerate}
   \item \textbf{Expresión Oral y Escrita y Búsqueda de Información:} Me ha ayudado a realizar una correcta redacción de la memoria y buscar información de forma eficaz.
-  \item \textbf{Informática I:} Cuando estudie esta asignatura en 2016, me enseñaron Picky pero aún así pude aprender los fundamentos de la programación y las sintaxis básicas.
+  \item \textbf{Informática I:} Cuando estudié esta asignatura en 2016, me enseñaron Picky pero aún así pude aprender los fundamentos de la programación y las sintaxis básicas.
   \item \textbf{Protocolos para la Transmisión de Audio y Vídeo en Internet:} En esta asignatura aprendí a programar en Python, el lenguaje con el que está desarrollada esta aplicación en su mayoría.
-  \item \textbf{Construcción de Servicios y Aplicaciones Audiovisuales en Internet:} Gracias a esta asignatura aprendí HTML, CSS y Javascript y me inicié en el desarrollo web del lado del cliente. Con estos lenguajes funcionan las diferentes ventanas de este proyecto.
+  \item \textbf{Construcción de Servicios y Aplicaciones Audiovisuales en Internet:} Gracias a esta asignatura aprendí HTML, CSS y JavaScript y me inicié en el desarrollo web del lado del cliente. Con estos lenguajes funcionan las diferentes ventanas de este proyecto.
   \item \textbf{Laboratorio de Tecnologías Audiovisuales en la Web:} En esta asignatura aprendí a desarrollar el lado del servidor en una página web lo que ha sido de mucha ayuda a la hora de entender fácilmente Django.
 \end{enumerate}
 \section{Lecciones aprendidas}
@@ -1103,7 +1103,7 @@ Con lo aprendido durante el grado no fue suficiente así que tuve que adquirir d
   \item Aprender a gestionar y aprovechar mejor el tiempo en un proyecto más largo que cualquier trabajo de clase.
   \item Entender y utilizar Django.
   \item Entender y utilizar PyGitHub.
-  \item Avanzar en mis conocimientos de GitHub y aprender que no se trata simplemente de un repositorio donde subir tus proyectos si no que también ayuda a gestionarlos, buscar errores, colaborar con otros desarrolladores, etc.
+  \item Avanzar en mis conocimientos de GitHub y aprender que no se trata simplemente de un repositorio donde subir tus proyectos sino que también ayuda a gestionarlos, buscar errores, colaborar con otros desarrolladores, etc.
   \item Aprender a realizar un manual de usuario.
   \item Afianzar mis conocimientos sobre programación y programar de una manera más limpia.
   \item Aprender a utilizar \LaTeX  para la redacción de la memoria.
